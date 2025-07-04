@@ -1,0 +1,5 @@
+.Info
+objType: Button
+size 100 100
+pos 120 230
+onClick gameButtonScript buttonNum 8

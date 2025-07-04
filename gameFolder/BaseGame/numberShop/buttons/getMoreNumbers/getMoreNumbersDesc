@@ -1,0 +1,5 @@
+.Info
+objType: TextLabel
+size: 180 30
+pos: 10 60
+text: +0 -> +1

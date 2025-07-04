@@ -1,0 +1,19 @@
+.Script
+
+if(buttonNum == numGamePos){
+  // Get numbers
+  add number actuGameNum;
+  add actuGameNum 1;
+  add actuGameNum numberGetMoreNumbers;
+
+  //TEMP TO REMOVE
+  printf(numbers: number);
+
+  // Reset last button's text
+  startScript gameButtonChangeNum numPos numGamePos val " ";
+
+  // Change the button to click and write the number on it
+  randInto(numGamePos, 1, 9);
+  startScript gameButtonChangeNum numPos numGamePos val actuGameNum;
+
+}

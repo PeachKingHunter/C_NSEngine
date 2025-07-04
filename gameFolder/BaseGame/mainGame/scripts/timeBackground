@@ -1,0 +1,7 @@
+.Start
+intG lastTime = time;
+printf("time:" + lastTime);
+
+.Update
+printf(time);
+

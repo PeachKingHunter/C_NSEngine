@@ -1,0 +1,6 @@
+.Start
+printf("NUMBER'S SHOP TODO");
+loadOrCreate "numberGetMoreNumbers" numberGetMoreNumbers 0;
+loadOrCreate "numberGetMoreNumbersQuant" numberGetMoreNumbersQuant 0;
+loadOrCreate "numberGetMoreNumbersPrice" numberGetMoreNumbersPrice 10;
+

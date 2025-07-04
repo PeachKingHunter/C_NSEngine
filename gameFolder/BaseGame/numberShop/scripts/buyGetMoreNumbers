@@ -1,0 +1,7 @@
+.Script
+if(numberGetMoreNumbersPrice < number){
+  printf(numberGetMoreNumbersPrice);
+//add numberGetMoreNumbers 1;
+  add numberGetMoreNumbersQuant 1;
+  add numberGetMoreNumbers numberGetMoreNumbersQuant;
+}

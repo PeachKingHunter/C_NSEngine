@@ -1,0 +1,30 @@
+.Script
+
+if(numPos == 1)
+{
+  changeTextOf(button11, val);
+}
+if(numPos == 2){
+  changeTextOf(button21, val);
+}
+if(numPos == 3){
+  changeTextOf(button31, val);
+}
+if(numPos == 4){
+  changeTextOf(button12, val);
+}
+if(numPos == 5){
+  changeTextOf(button22, val);
+}
+if(numPos == 6){
+  changeTextOf(button32, val);
+}
+if(numPos == 7){
+  changeTextOf(button13, val);
+}
+if(numPos == 8){
+  changeTextOf(button23, val);
+}
+if(numPos == 9){
+  changeTextOf(button33, val);
+}
