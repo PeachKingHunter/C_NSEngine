@@ -11,6 +11,7 @@ void freeGameStruct(){
   freeWindowLC(gameStruct->windows);
   deleteNum(gameStruct->timeSec);
   deleteNum(gameStruct->delta);
+  deleteNum(gameStruct->nbFrame);
 
   // How To destroy constant ??
   //free(gameStruct);
@@ -118,3 +119,53 @@ ButtonLC *searchButton(WindowLC *windowLC, char *name){
   return NULL;
 }
 
+
+TextLabelLC *searchTextLabel(WindowLC *windowLC, char *name){
+  // Verif entry
+  if(windowLC == NULL)
+    return NULL;
+
+  // navigate throught buttons
+  TextLabelLC *tl = windowLC->textLabels;
+  while(tl != NULL){
+    if(strcmp(tl->name, name) == 0)
+      return tl;
+
+    tl = tl->next;
+  }
+
+  if(windowLC->next != NULL)
+    return searchTextLabel(windowLC->next, name);
+
+  return NULL;
+}
+
+void *searchInstanceByName(WindowLC *windowLC, char *name, int *type){
+  // Verif entry
+  if(windowLC == NULL || name == NULL || type == NULL){
+    *type = -1;
+    return NULL;
+  }
+
+  void *res = searchButton(windowLC, name);
+  if(res != NULL){
+    *type = 2;
+    return res;
+  }
+
+  res = searchTextLabel(windowLC, name);
+  if(res != NULL){
+    *type = 3;
+    return res;
+  }
+
+  /*while(windowLC != NULL){
+    if(strcmp(windowLC->name, name) == 0){    TODO: ADD name to windowLC
+      *type = 1;
+      return windowLC;
+    }
+    windowLC = windowLC->next;
+  }*/
+
+  return NULL;
+}

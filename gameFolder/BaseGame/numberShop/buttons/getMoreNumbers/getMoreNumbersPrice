@@ -1,0 +1,6 @@
+.Info
+objType: TextLabel
+size: 150 40
+pos: 230 10
+onClick: buyGetMoreNumbers
+text: "Buy x1"

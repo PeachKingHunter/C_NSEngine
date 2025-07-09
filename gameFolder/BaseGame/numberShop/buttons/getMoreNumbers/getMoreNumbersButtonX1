@@ -3,4 +3,4 @@ objType: Button
 size: 70 30
 pos: 230 60
 onClick: buyGetMoreNumbers
-text: Buy
+text: "Buy x1"

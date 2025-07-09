@@ -261,6 +261,7 @@ int main(int argc, char** argv)
   gameStruct->allCategories = allCategories;
 
   gameStruct->timeSec = createEmptyNum(5);
+  gameStruct->nbFrame = createEmptyNum(5);
   gameStruct->delta = createEmptyNum(2);
 
   // Execute on start Scripts
@@ -294,6 +295,7 @@ int main(int argc, char** argv)
   //int frame = 0;
   while(isRunning){ 
     frame++;
+    addNumInto(gameStruct->nbFrame, bigOne);
     // wait time for target_fps
     int delayTime = 1000/TARGET_FPS - offset;
     if(delayTime < 0)
@@ -323,7 +325,7 @@ int main(int argc, char** argv)
           if(mouseButtonEvent.button == 1){
             clickLeftMouse(window, mouseButtonEvent.x, mouseButtonEvent.y, mouseButtonEvent.windowID);
           }
-        break;
+          break;
       }
 
       if(event.type == SDL_EVENT_QUIT){
@@ -331,17 +333,35 @@ int main(int argc, char** argv)
       }
     }
 
-    // Render the whole game
-    render(window);
+    // Call update functions
+    Category *scripts = searchCategory(allCategories, "Update");
+    if(scripts != NULL){
+      FilePiece *scriptsFile = scripts->files;
+      while(scriptsFile != NULL){
+        executeCode(scriptsFile, NULL, NULL);
+        scriptsFile = scriptsFile->next;
+      }
+    }
 
     if(frame >= TARGET_FPS){
       frame -= TARGET_FPS;
       addNumInto(gameStruct->timeSec, bigOne);
-      //onUpdateS();
+      //onUpdateS();  
+      /*Category *scripts = searchCategory(allCategories, "UpdateS");
+    if(scripts != NULL){
+      FilePiece *scriptsFile = scripts->files;
+      while(scriptsFile != NULL){
+        executeCode(scriptsFile, NULL, NULL);
+        scriptsFile = scriptsFile->next;
+      }
+      }*/
     } 
+
+    // Render the whole game
+    render(window);
   }
   deleteNum(bigOne);
-  
+
   // Save Data
   saveHashmap("saveRessourceData", gameStruct->ressourceVars, getStrOfNumNotFormated);
   

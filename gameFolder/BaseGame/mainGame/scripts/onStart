@@ -3,8 +3,7 @@
 loadOrCreate "NumberResource" number 0;
 intG numGamePos 5;
 intG actuGameNum 1;
-
-printf("numpos:" + numGamePos);
+intG lastResetFrame nbFrame;
 
 // Write the default number on the grid
 startScript gameButtonChangeNum numPos numGamePos val actuGameNum;

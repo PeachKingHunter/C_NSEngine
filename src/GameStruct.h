@@ -20,6 +20,7 @@ typedef struct gameStruct {
   Category *allCategories;
   WindowLC *windows;
   BigNumber *timeSec;
+  BigNumber *nbFrame;
   BigNumber *delta;
 } GameStruct;
 
@@ -30,6 +31,8 @@ void render(WindowLC *windowLC);
 
 FilePiece *searchObjectByName(Category *allCat, char *name, char *category);
 ButtonLC *searchButton(WindowLC *windowLC, char *name);
+TextLabelLC *searchTextLabel(WindowLC *windowLC, char *name);
+void *searchInstanceByName(WindowLC *windowLC, char *name, int *type);
 
 #endif
 

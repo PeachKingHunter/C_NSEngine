@@ -120,16 +120,23 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
         // call an other script
         } else if(strcmp("startScript", line->words[0]) == 0){
 
-        FilePiece *toStartScript = searchObjectByName(gameStruct->allCategories, line->words[1], "Script");
-        executeCode(toStartScript, line, map); 
+          FilePiece *toStartScript = searchObjectByName(gameStruct->allCategories, line->words[1], "Script");
+          executeCode(toStartScript, line, map); 
 
-        // Create an integer variable
+          // Create an integer variable
         } else if(strcmp("int", line->words[0]) == 0){
           if(line->wordsLength == 2){
             hashmap_insert(map, line->words[1], createEmptyNum(0), deleteNum);
 
           } else if(line->wordsLength == 3){
-            hashmap_insert(map, line->words[1], createNumByConst(line->words[2]), deleteNum);
+            BigNumber *tmpN = getVar(map, line, 2);
+            if(tmpN != NULL){
+              hashmap_insert(map, line->words[1], copyNum(tmpN), deleteNum);
+
+            } else {
+              hashmap_insert(map, line->words[1], createNumByConst(line->words[2]), deleteNum);
+
+            }
 
           } else {
             printf("Too few or too many arg for int variable\n");
@@ -190,8 +197,53 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
 
           }
 
-        // Arithmetic operator add
-        } else if(strcmp("add", line->words[0]) == 0 && line->wordsLength == 3){
+        } else if(strcmp("setSizeOf", line->words[0]) == 0 && line->wordsLength == 4){
+          int type = 0;
+          void *instance = searchInstanceByName(gameStruct->windows, line->words[1], &type);
+          if(instance == NULL || type == -1)
+            continue;
+
+          if(type == 2){
+            ButtonLC *button = instance;
+
+            // For sizeX
+            BigNumber *tmpN = getVar(map, line, 2);
+            if(tmpN != NULL){
+              char *str = getStrOfNumNotFormated(tmpN);
+              if(str != NULL){
+                button->sizeX = atoi(str);
+                free(str);
+              }
+
+            } else if(line->words[2][0] < '9' && line->words[2][0] > '0'){
+              button->sizeX = atoi(line->words[2]);
+
+            }
+
+            //TODO For sizeY
+
+          } else if(type == 3){
+            TextLabelLC *tl = instance;
+            // For sizeX
+            BigNumber *tmpN = getVar(map, line, 2);
+            if(tmpN != NULL){
+              char *str = getStrOfNumNotFormated(tmpN);
+              if(str != NULL){
+                tl->sizeX = atoi(str);
+                free(str);
+              }
+
+            } else if(line->words[2][0] < '9' && line->words[2][0] > '0'){
+              tl->sizeX = atoi(line->words[2]);
+
+            }
+
+
+            //TODO Like above
+          }
+
+        // Arithmetic operator 
+        } else if((strcmp("add", line->words[0]) == 0 || strcmp("set", line->words[0]) == 0 || strcmp("minus", line->words[0]) == 0 || strcmp("mult", line->words[0]) == 0) && line->wordsLength == 3){
 
           BigNumber *var1 = NULL;
           BigNumber *var2 = NULL;
@@ -204,16 +256,29 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
 
           var2 = getVar(map, line, 2);
           if(var2 == NULL){
-            //var2 = createNumByConst(line->words[2]);
-            var2 = createNumByConst("10");
+            var2 = createNumByConst(line->words[2]);
+            //var2 = createNumByConst("10");
             var2IsToFree = 1;
           }
 
-          addNumInto(var1, var2);
+          if(strcmp("add", line->words[0]) == 0)
+            addNumInto(var1, var2);
+          if(strcmp("mult", line->words[0]) == 0)
+            multNumInto(var1, var2);
+          if(strcmp("minus", line->words[0]) == 0)
+            minusNumInto(var1, var2);
+          if(strcmp("set", line->words[0]) == 0){
+            free(var1->number);
+            var1->number = strdup(var2->number);
+            var1->size = var2->size;
+            var1->usedSize = var2->usedSize;
+          }
 
           // Clearing temp variables
           if(var2IsToFree == 1)
             deleteNum(var2);
+
+
         } else if(strcmp("randInto", line->words[0]) == 0 && line->wordsLength >= 4){
           BigNumber *var1 = getVar(map, line, 1);
           // If Var Not Exist
@@ -307,12 +372,14 @@ BigNumber *getVar(HashMap *vars, Line *line, int j){
 
   // Priority for preBuilt variables, local variables, global and ressource in last  
   if(strcmp(line->words[j], "time") == 0){
-    printf("Ok time\n");
     return gameStruct->timeSec;
   }
 
   if(strcmp(line->words[j], "delta") == 0)
     return gameStruct->delta;
+
+  if(strcmp(line->words[j], "nbFrame") == 0)
+    return gameStruct->nbFrame;
 
   void *val = NULL;
   if(vars != NULL){

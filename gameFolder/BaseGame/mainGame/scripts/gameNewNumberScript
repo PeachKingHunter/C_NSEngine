@@ -1,0 +1,10 @@
+.Script
+//Next number
+set lastResetFrame nbFrame;
+
+// Reset last button's text
+startScript gameButtonChangeNum numPos numGamePos val " ";
+
+// Change the button to click and write the number on it
+randInto(numGamePos, 1, 9);
+startScript gameButtonChangeNum numPos numGamePos val actuGameNum;

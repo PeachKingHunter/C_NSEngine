@@ -403,9 +403,10 @@ BigNumber *multNumInto(BigNumber *num1, BigNumber *num2){
     return NULL;
   }
 
-  while(!isEqualToZero(num2)){
+  BigNumber *tmp = copyNum(num2); 
+  while(!isEqualToZero(tmp)){
     addNumInto(res, num1);
-    minusNumInto(num2, one); // Need Copy Fonction to not alter num2
+    minusNumInto(tmp, one); // Need Copy Fonction to not alter num2
   }
 
   num1->size = res->size;
@@ -414,6 +415,7 @@ BigNumber *multNumInto(BigNumber *num1, BigNumber *num2){
   num1->number = res->number;
   free(res);
   deleteNum(one);
+  deleteNum(tmp);
   return num1;
 }
 
