@@ -3,3 +3,5 @@ objType: TextLabel
 size: 180 30
 pos: 10 60
 text: "+0 -> +1"
+borderColor: 255 255 255
+backgroundColor: 44 44 44

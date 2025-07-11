@@ -6,6 +6,7 @@
 #include "Parser/Parser.h"
 #include "src/GameStruct.h"
 #include "src/CodeInterpretor.h"
+#include "src/Render.h"
 
 #include <time.h>
 
@@ -115,6 +116,8 @@ int main(int argc, char** argv)
       Line *callLine = NULL;
       void *obj = NULL;
       char *text = NULL;
+      int borderColor[4] = {255, 0, 0, 255};
+      int backgroundColor[4] = {255, 0, 0, 255};
 
       while(abc < fp->nbLine){
         line = fp->data[abc];
@@ -152,6 +155,55 @@ int main(int argc, char** argv)
             ((TextLabelLC *) obj)->posY = posY;
           }
 
+        } else if(strcmp(line->words[0], "borderColor") == 0){
+          // Change Temp Var borderColor
+          if(line->wordsLength > 3){
+            borderColor[0] = atoi(line->words[1]);
+            borderColor[1] = atoi(line->words[2]);
+            borderColor[2] = atoi(line->words[3]);
+          }
+          if(line->wordsLength > 4)
+            borderColor[3] = atoi(line->words[4]);
+
+          // If the object was already created
+          if(objType == 2){
+            ((ButtonLC *) obj)->borderColor[0] = borderColor[0];
+            ((ButtonLC *) obj)->borderColor[1] = borderColor[1];
+            ((ButtonLC *) obj)->borderColor[2] = borderColor[2];
+            ((ButtonLC *) obj)->borderColor[3] = borderColor[3];
+          } else if(objType == 3){
+            ((TextLabelLC *) obj)->borderColor[0] = borderColor[0];
+            ((TextLabelLC *) obj)->borderColor[1] = borderColor[1];
+            ((TextLabelLC *) obj)->borderColor[2] = borderColor[2];
+            ((TextLabelLC *) obj)->borderColor[3] = borderColor[3];
+          }
+
+        } else if(strcmp(line->words[0], "backgroundColor") == 0){
+          // Change Temp Var backgroundColor
+          if(line->wordsLength > 3){
+            backgroundColor[0] = atoi(line->words[1]);
+            backgroundColor[1] = atoi(line->words[2]);
+            backgroundColor[2] = atoi(line->words[3]);
+          }
+          if(line->wordsLength > 4)
+            backgroundColor[3] = atoi(line->words[4]);
+
+          // If the object was already created
+          if(objType == 2){
+            ((ButtonLC *) obj)->backgroundColor[0] = backgroundColor[0];
+            ((ButtonLC *) obj)->backgroundColor[1] = backgroundColor[1];
+            ((ButtonLC *) obj)->backgroundColor[2] = backgroundColor[2];
+            ((ButtonLC *) obj)->backgroundColor[3] = backgroundColor[3];
+
+          } else if(objType == 3){
+            ((TextLabelLC *) obj)->backgroundColor[0] = backgroundColor[0];
+            ((TextLabelLC *) obj)->backgroundColor[1] = backgroundColor[1];
+            ((TextLabelLC *) obj)->backgroundColor[2] = backgroundColor[2];
+            ((TextLabelLC *) obj)->backgroundColor[3] = backgroundColor[3];
+
+          }
+
+
         } else if(strcmp(line->words[0], "objType") == 0){
           if(strcmp(line->words[1], "Window") == 0){
             // Create Window
@@ -187,6 +239,7 @@ int main(int argc, char** argv)
               freeWindowLC(window);
               return -1;
             }
+            SDL_SetRenderDrawBlendMode(renderer,SDL_BLENDMODE_BLEND);
             window->renderer = renderer;
             
             objType = 1;
@@ -194,7 +247,7 @@ int main(int argc, char** argv)
 
           } else if(strcmp(line->words[1], "Button") == 0){
             // Create Button
-            ButtonLC *button = createButton(sizeX, sizeY, fp->fileName, &text, &onClickScript, &callLine);
+            ButtonLC *button = createButton(sizeX, sizeY, fp->fileName, &text, &onClickScript, &callLine, borderColor, backgroundColor);
             if(button == NULL){
               printf("Error Creating a Button");
               freeWindowLC(window);
@@ -209,7 +262,7 @@ int main(int argc, char** argv)
 
           } else if(strcmp(line->words[1], "TextLabel") == 0){
             // Create textLabel 
-            TextLabelLC *textLabel = createTextLabel(sizeX, sizeY, fp->fileName, &text);
+            TextLabelLC *textLabel = createTextLabel(sizeX, sizeY, fp->fileName, &text, borderColor, backgroundColor);
             if(textLabel == NULL){
               printf("Error Creating a Button");
               freeWindowLC(window);

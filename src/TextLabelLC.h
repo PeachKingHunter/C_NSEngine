@@ -16,11 +16,13 @@ typedef struct textLabelLC {
   int sizeX, sizeY;
   int posX, posY;
   char *name;
-  char *text;
+  char *text;  
+  int *borderColor;
+  int *backgroundColor;
   struct textLabelLC *next;
 } TextLabelLC;
 
 void freeTextLabels(TextLabelLC *textLabels);
-TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text);
+TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int *borderColor, int *backgroundColor);
 
 #endif

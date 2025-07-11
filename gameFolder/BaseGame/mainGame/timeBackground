@@ -1,4 +1,6 @@
 .Info
 objType: TextLabel
-pos: 0 0
+pos: -1 -1
 size: 0 350
+borderColor: 255 255 255
+backgroundColor: 44 44 44

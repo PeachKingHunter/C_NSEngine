@@ -3,3 +3,5 @@ objType: Button
 size 100 100
 pos 120 10
 onClick gameButtonScript buttonNum 2
+borderColor 255 255 255
+backgroundColor 100 100 100

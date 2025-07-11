@@ -1807,30 +1807,6 @@
    <insert_a_suppression_name_here>
    Memcheck:Leak
    match-leak-kinds: reachable
-   fun:realloc
-   fun:UnknownInlinedFun
-   fun:set_length
-   fun:open_gap
-   fun:UnknownInlinedFun
-   fun:_dbus_string_copy_len
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:_dbus_message_loader_queue_messages
-   fun:_dbus_transport_get_dispatch_status
-   fun:_dbus_transport_queue_messages
-   fun:do_reading
-   fun:socket_do_iteration
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:_dbus_connection_do_iteration_unlocked
-   fun:UnknownInlinedFun
-   fun:dbus_pending_call_block
-   fun:dbus_connection_send_with_reply_and_block
-}
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: reachable
    fun:malloc
    fun:create.lto_priv.0
    fun:_XlcCreateLC
@@ -1866,6 +1842,30 @@
    fun:SDL_CreateWindowWithProperties_REAL
    fun:SDL_CreateWindow_REAL
    fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:UnknownInlinedFun
+   fun:set_length
+   fun:open_gap
+   fun:UnknownInlinedFun
+   fun:_dbus_string_copy_len
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_dbus_message_loader_queue_messages
+   fun:_dbus_transport_get_dispatch_status
+   fun:_dbus_transport_queue_messages
+   fun:do_reading
+   fun:socket_do_iteration
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_dbus_connection_do_iteration_unlocked
+   fun:UnknownInlinedFun
+   fun:dbus_pending_call_block
+   fun:dbus_connection_send_with_reply_and_block
 }
 {
    <insert_a_suppression_name_here>
@@ -1984,6 +1984,29 @@
    fun:SDL_CreateWindowWithProperties_REAL
    fun:SDL_CreateWindow_REAL
    fun:main
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   fun:realloc
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_dbus_string_lengthen
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_dbus_type_writer_recurse_contained_len.lto_priv.0
+   fun:_dbus_type_writer_recurse
+   fun:write_basic_field.lto_priv.0
+   fun:_dbus_header_set_field_basic
+   fun:UnknownInlinedFun
+   fun:_dbus_message_iter_close_signature
+   fun:dbus_message_iter_append_basic
+   fun:dbus_message_new_error
+   fun:UnknownInlinedFun
+   fun:dbus_connection_send_with_reply
+   fun:dbus_connection_send_with_reply_and_block
+   fun:SDL_DBus_CallMethodInternal
 }
 {
    <insert_a_suppression_name_here>
@@ -2174,29 +2197,6 @@
    <insert_a_suppression_name_here>
    Memcheck:Leak
    match-leak-kinds: reachable
-   fun:realloc
-   fun:UnknownInlinedFun
-   fun:set_length
-   fun:open_gap
-   fun:UnknownInlinedFun
-   fun:_dbus_string_copy_len
-   fun:marshal_len_followed_by_bytes.lto_priv.0
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:_dbus_type_writer_write_basic
-   fun:write_basic_field.lto_priv.0
-   fun:_dbus_header_create.constprop.0
-   fun:dbus_message_new_method_call
-   fun:SDL_DBus_CallVoidMethodInternal
-   fun:SDL_DBus_CallVoidMethod
-   fun:X11_SuspendScreenSaver
-}
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
-   match-leak-kinds: reachable
    fun:malloc
    fun:malloc
    fun:strdup
@@ -2353,29 +2353,6 @@
 {
    <insert_a_suppression_name_here>
    Memcheck:Leak
-   match-leak-kinds: indirect
-   fun:realloc
-   fun:UnknownInlinedFun
-   fun:set_length
-   fun:open_gap
-   fun:UnknownInlinedFun
-   fun:_dbus_string_copy_len
-   fun:UnknownInlinedFun
-   fun:_dbus_message_loader_queue_messages
-   fun:_dbus_transport_get_dispatch_status
-   fun:_dbus_transport_queue_messages
-   fun:do_reading
-   fun:socket_do_iteration
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:_dbus_connection_do_iteration_unlocked
-   fun:UnknownInlinedFun
-   fun:dbus_pending_call_block
-   fun:dbus_connection_send_with_reply_and_block
-}
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
    match-leak-kinds: reachable
    fun:calloc
    fun:store_to_database
@@ -2457,6 +2434,29 @@
 {
    <insert_a_suppression_name_here>
    Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:realloc
+   fun:UnknownInlinedFun
+   fun:set_length
+   fun:open_gap
+   fun:UnknownInlinedFun
+   fun:_dbus_string_copy_len
+   fun:UnknownInlinedFun
+   fun:_dbus_message_loader_queue_messages
+   fun:_dbus_transport_get_dispatch_status
+   fun:_dbus_transport_queue_messages
+   fun:do_reading
+   fun:socket_do_iteration
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:_dbus_connection_do_iteration_unlocked
+   fun:UnknownInlinedFun
+   fun:dbus_pending_call_block
+   fun:dbus_connection_send_with_reply_and_block
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
    match-leak-kinds: reachable
    fun:malloc
    fun:_XlcCreateDefaultCharSet
@@ -2518,23 +2518,6 @@
 {
    <insert_a_suppression_name_here>
    Memcheck:Leak
-   match-leak-kinds: definite
-   fun:calloc
-   fun:dbus_message_new_empty_header
-   fun:dbus_message_new_method_call
-   fun:dbus_bus_register
-   fun:internal_bus_get
-   fun:SDL_DBus_Init
-   fun:SDL_InitSubSystem_REAL.part.0
-   fun:UnknownInlinedFun
-   fun:UnknownInlinedFun
-   fun:SDL_CreateWindowWithProperties_REAL
-   fun:SDL_CreateWindow_REAL
-   fun:main
-}
-{
-   <insert_a_suppression_name_here>
-   Memcheck:Leak
    match-leak-kinds: reachable
    fun:calloc
    fun:add_codeset
@@ -2592,6 +2575,23 @@
    fun:XSetLocaleModifiers
    fun:UnknownInlinedFun
    fun:X11_VideoInit
+}
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:calloc
+   fun:dbus_message_new_empty_header
+   fun:dbus_message_new_method_call
+   fun:dbus_bus_register
+   fun:internal_bus_get
+   fun:SDL_DBus_Init
+   fun:SDL_InitSubSystem_REAL.part.0
+   fun:UnknownInlinedFun
+   fun:UnknownInlinedFun
+   fun:SDL_CreateWindowWithProperties_REAL
+   fun:SDL_CreateWindow_REAL
+   fun:main
 }
 {
    <insert_a_suppression_name_here>

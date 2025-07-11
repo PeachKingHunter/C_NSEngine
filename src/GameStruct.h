@@ -12,7 +12,7 @@
 #include "../Hachage/Hachage.h"
 #include "../BigNumberManager/BigNumberManager.h"
 
-#include "WindowLC.h"
+#include "Render.h"
 
 typedef struct gameStruct {
   HashMap *globalVars;
@@ -26,8 +26,6 @@ typedef struct gameStruct {
 
 GameStruct *getGameStruct();
 void freeGameStruct();
-
-void render(WindowLC *windowLC);
 
 FilePiece *searchObjectByName(Category *allCat, char *name, char *category);
 ButtonLC *searchButton(WindowLC *windowLC, char *name);

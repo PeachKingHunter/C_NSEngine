@@ -4,3 +4,5 @@ size: 150 40
 pos: 230 10
 onClick: buyGetMoreNumbers
 text: "Buy x1"
+borderColor: 255 255 255
+backgroundColor: 44 44 44

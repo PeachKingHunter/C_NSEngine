@@ -3,3 +3,5 @@ objType: TextLabel
 size: 180 40
 pos: 10 10
 text: "Get More Numbers"
+borderColor: 255 255 255
+backgroundColor: 44 44 44
