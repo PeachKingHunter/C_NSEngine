@@ -55,7 +55,7 @@ ButtonLC *searchButton(WindowLC *windowLC, char *name){
   // navigate throught buttons
   ButtonLC *button = windowLC->buttons;
   while(button != NULL){
-    if(strcmp(button->name, name) == 0)
+    if(strcmp(getButtonName(button), name) == 0)
       return button;
 
     button = button->next;

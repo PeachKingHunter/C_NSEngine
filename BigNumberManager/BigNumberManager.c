@@ -447,9 +447,9 @@ char *getStrOfNum(BigNumber *num){
 
   // What will be display
   int naturalDisplay = (num->usedSize-1)%3+1;
-  printf("naturalDisplay: %d\n", naturalDisplay);
+  //printf("naturalDisplay: %d\n", naturalDisplay);
   int power = num->usedSize - naturalDisplay;
-  printf("power: %d\n", power);
+  //printf("power: %d\n", power);
 
   int neededSize = naturalDisplay + 1; // +1 for \0
 

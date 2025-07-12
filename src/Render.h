@@ -15,5 +15,7 @@
 #include "WindowLC.h"
 
 void render(WindowLC *windowLC);
+void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC);
+
 
 #endif

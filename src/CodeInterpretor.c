@@ -11,14 +11,21 @@ void clickLeftMouse(WindowLC *windowLC, float posX, float posY, SDL_WindowID win
     return ;
   }
 
+  if(SDL_GetWindowID(windowLC->window) != windowID){
+    clickLeftMouse(windowLC->next, posX, posY, windowID);
+    return ;
+  }
+
   // Detect click in button 
   ButtonLC *button = windowLC->buttons;
   while(button != NULL){
-    if(posX > button->posX && posY > button->posY && posX < button->posX + button->sizeX && posY < button->posY + button->sizeY){
-      if(SDL_GetWindowID(windowLC->window) == windowID){
-        //printf("Button clicked\n");
-        executeCode(button->onClickScript, button->callLine, NULL); 
-      }
+    if(posX > getButtonPosX(button) 
+      && posY > getButtonPosY(button) 
+      && posX < getButtonPosX(button) + getButtonSizeX(button) 
+      && posY < getButtonPosY(button) + getButtonSizeY(button))
+    {
+      //printf("Button clicked\n");
+      executeCode(button->onClickScript, button->callLine, NULL); 
     }
     button = button->next;
   }
@@ -56,7 +63,7 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
     }
   }
 
-  printf("\n--execute Script--\n");
+  //printf("\n--execute Script--\n");
   // Execute lines
   for(int i=0; i < code->nbLine; i++){
     Line *line =code->data[i];
@@ -80,11 +87,12 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           printf("\n");
 
         // Change the text of an button
-        } else if(strcmp("changeTextOf", line->words[0]) == 0){
-          // Get The button 
+        } else if(strcmp("changeTextOf", line->words[0]) == 0){ //TODO WORK
+          // Get The button and textLabel 
           ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
-          if(button == NULL){
-            printf("Button NOT Found\n");
+          TextLabelLC *tl = searchTextLabel(gameStruct->windows, line->words[1]);
+          if(button == NULL && tl == NULL){
+            printf("Button AND TextLabel NOT Found\n");
             continue;
           }
 
@@ -114,8 +122,15 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           buffer[index] = '\0';
 
           // Change the text
-          free(button->text);
-          button->text = strdup(buffer);
+          if(button != NULL){
+            free(button->tl->text);
+            button->tl->text = strdup(buffer);
+
+          } else if (tl != NULL){
+            free(tl->text);
+            tl->text = strdup(buffer);
+
+          }
         
         // call an other script
         } else if(strcmp("startScript", line->words[0]) == 0){
@@ -211,12 +226,12 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
             if(tmpN != NULL){
               char *str = getStrOfNumNotFormated(tmpN);
               if(str != NULL){
-                button->sizeX = atoi(str);
+                button->tl->sizeX = atoi(str);
                 free(str);
               }
 
             } else if(line->words[2][0] < '9' && line->words[2][0] > '0'){
-              button->sizeX = atoi(line->words[2]);
+              button->tl->sizeX = atoi(line->words[2]);
 
             }
 

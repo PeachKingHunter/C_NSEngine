@@ -51,5 +51,70 @@ TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int 
     *text = NULL;
 
   }
+  textLabel->next = NULL;
   return textLabel;
+}
+
+// Getters
+int getTextLabelSizeX(TextLabelLC *tl){
+  if(tl == NULL)
+    return -1;
+
+  return tl->sizeX;
+}
+
+int getTextLabelSizeY(TextLabelLC *tl){
+  if(tl == NULL)
+    return -1;
+
+  return tl->sizeY;
+}
+
+int getTextLabelPosX(TextLabelLC *tl){
+  if(tl == NULL)
+    return -1;
+
+  return tl->posX;
+}
+
+int getTextLabelPosY(TextLabelLC *tl){
+  if(tl == NULL)
+    return -1;
+
+  return tl->posY;
+}
+
+char *getTextLabelName(TextLabelLC *tl){
+  if(tl == NULL)
+    return NULL;
+
+  return tl->name;
+}
+
+char *getTextLabelText(TextLabelLC *tl){
+  if(tl == NULL)
+    return NULL;
+
+  return tl->text;
+}
+
+// Setters
+void setTextLabelBorderColor(TextLabelLC *tl, int borderColor[4]){
+  if(tl ==NULL || borderColor == NULL)
+    return;
+
+  tl->borderColor[0] = borderColor[0];
+  tl->borderColor[1] = borderColor[1];
+  tl->borderColor[2] = borderColor[2];
+  tl->borderColor[3] = borderColor[3];
+}
+
+void setTextLabelBackgroundColor(TextLabelLC *tl, int backgroundColor[4]){
+  if(tl ==NULL || backgroundColor == NULL)
+    return;
+
+  tl->backgroundColor[0] = backgroundColor[0];
+  tl->backgroundColor[1] = backgroundColor[1];
+  tl->backgroundColor[2] = backgroundColor[2];
+  tl->backgroundColor[3] = backgroundColor[3];
 }

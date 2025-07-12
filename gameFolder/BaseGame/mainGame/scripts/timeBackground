@@ -1,14 +1,11 @@
 .Start
 intG lastTime = time;
-printf("time:" + lastTime);
 
 .Update
 int timeNum nbFrame;
 minus timeNum lastResetFrame;
 mult timeNum actuGameNum;
 setSizeOf timeBackground timeNum same;
-printf(timeNum);
-
 
 // Reset on time passed
 if(timeNum > 340){

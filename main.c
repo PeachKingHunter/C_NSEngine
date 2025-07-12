@@ -25,8 +25,8 @@ void infoSizeOperand(Line *line, void *obj, int objType, int sizeX, int sizeY){
     SDL_SetWindowSize( ((WindowLC *) obj)->window, sizeX, sizeY);
 
   } else if(objType == 2){
-    ((ButtonLC *) obj)->sizeX = sizeX;
-    ((ButtonLC *) obj)->sizeY = sizeY;
+    ((ButtonLC *) obj)->tl->sizeX = sizeX;
+    ((ButtonLC *) obj)->tl->sizeY = sizeY;
 
   } else if(objType == 3){
     ((TextLabelLC *) obj)->sizeX = sizeX;
@@ -69,8 +69,8 @@ void infoTextOperand(Line *line, void *obj, int objType, char **text){
   //If the object was already created
   if(objType == 2){
     ButtonLC *objCasted = ((ButtonLC *) obj);
-    free(objCasted->text);
-    objCasted->text = *text;
+    free(objCasted->tl->text);
+    objCasted->tl->text = *text;
     *text = NULL;
 
   } else if(objType == 3){
@@ -148,8 +148,8 @@ int main(int argc, char** argv)
 
           //If the object was already created
           if(objType == 2){
-            ((ButtonLC *) obj)->posX = posX;
-            ((ButtonLC *) obj)->posY = posY;
+            ((ButtonLC *) obj)->tl->posX = posX;
+            ((ButtonLC *) obj)->tl->posY = posY;
           } else if(objType == 3){
             ((TextLabelLC *) obj)->posX = posX;
             ((TextLabelLC *) obj)->posY = posY;
@@ -167,15 +167,11 @@ int main(int argc, char** argv)
 
           // If the object was already created
           if(objType == 2){
-            ((ButtonLC *) obj)->borderColor[0] = borderColor[0];
-            ((ButtonLC *) obj)->borderColor[1] = borderColor[1];
-            ((ButtonLC *) obj)->borderColor[2] = borderColor[2];
-            ((ButtonLC *) obj)->borderColor[3] = borderColor[3];
+            setButtonBorderColor(obj, borderColor);
+
           } else if(objType == 3){
-            ((TextLabelLC *) obj)->borderColor[0] = borderColor[0];
-            ((TextLabelLC *) obj)->borderColor[1] = borderColor[1];
-            ((TextLabelLC *) obj)->borderColor[2] = borderColor[2];
-            ((TextLabelLC *) obj)->borderColor[3] = borderColor[3];
+            setTextLabelBorderColor(obj, borderColor);
+
           }
 
         } else if(strcmp(line->words[0], "backgroundColor") == 0){
@@ -190,17 +186,11 @@ int main(int argc, char** argv)
 
           // If the object was already created
           if(objType == 2){
-            ((ButtonLC *) obj)->backgroundColor[0] = backgroundColor[0];
-            ((ButtonLC *) obj)->backgroundColor[1] = backgroundColor[1];
-            ((ButtonLC *) obj)->backgroundColor[2] = backgroundColor[2];
-            ((ButtonLC *) obj)->backgroundColor[3] = backgroundColor[3];
+            setButtonBackgroundColor(obj, backgroundColor);
 
           } else if(objType == 3){
-            ((TextLabelLC *) obj)->backgroundColor[0] = backgroundColor[0];
-            ((TextLabelLC *) obj)->backgroundColor[1] = backgroundColor[1];
-            ((TextLabelLC *) obj)->backgroundColor[2] = backgroundColor[2];
-            ((TextLabelLC *) obj)->backgroundColor[3] = backgroundColor[3];
-
+            setTextLabelBackgroundColor(obj, backgroundColor);
+            
           }
 
 
