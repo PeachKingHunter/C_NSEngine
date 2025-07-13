@@ -13,9 +13,9 @@ void freeButtons(ButtonLC *buttons) {
   }
 }
 
-ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text, FilePiece **onClickScript, Line **callLine, int *borderColor, int *backgroundColor){
+ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text, FilePiece **onClickScript, Line **callLine, int *borderColor, int *backgroundColor, int *textColor, int textSize){
   ButtonLC *button = (ButtonLC *) malloc(sizeof(ButtonLC));
-  button->tl = createTextLabel(sizeX, sizeY, name, text, borderColor, backgroundColor);
+  button->tl = createTextLabel(sizeX, sizeY, name, text, borderColor, backgroundColor, textColor, textSize);
   button->onClickScript = *onClickScript;
   *onClickScript = NULL;
   button->callLine = *callLine;
@@ -79,4 +79,18 @@ void setButtonBackgroundColor(ButtonLC *button, int backgroundColor[4]){
     return ;
 
   setTextLabelBackgroundColor(button->tl, backgroundColor);
+}
+
+void setButtonTextColor(ButtonLC *button, int textColor[4]){
+  if(button == NULL)
+    return ;
+
+  setTextLabelTextColor(button->tl, textColor);
+}
+
+void setButtonTextSize(ButtonLC *button, int TextSize){
+  if(button == NULL)
+    return ;
+
+  setTextLabelTextSize(button->tl, TextSize);
 }

@@ -39,7 +39,7 @@ $(obj)GamePackages.o: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.
 	ld -r -o $@ $^
 
 main: main.c $(obj)Parser.o  $(obj)Hachage.o $(obj)BigNumberManager.o $(obj)GamePackages.o
-	gcc -Wall -o $@ $^ -lSDL3
+	gcc -Wall -o $@ $^ -lSDL3 -lSDL3_ttf
 
 
 # Running commands

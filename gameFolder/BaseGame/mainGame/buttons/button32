@@ -5,3 +5,4 @@ pos 230 120
 onClick gameButtonScript buttonNum 6
 borderColor 255 255 255
 backgroundColor 100 100 100
+textColor 255 255 255

@@ -2,6 +2,7 @@
 #include "SDL3/SDL.h"
 #include "SDL3/SDL_video.h"
 #include "SDL3/SDL_events.h"
+#include "SDL3_ttf/SDL_ttf.h"
 
 #include "Parser/Parser.h"
 #include "src/GameStruct.h"
@@ -118,6 +119,8 @@ int main(int argc, char** argv)
       char *text = NULL;
       int borderColor[4] = {255, 0, 0, 255};
       int backgroundColor[4] = {255, 0, 0, 255};
+      int textColor[4] = {255, 0, 0, 255};
+      int textSize = 10;
 
       while(abc < fp->nbLine){
         line = fp->data[abc];
@@ -190,9 +193,41 @@ int main(int argc, char** argv)
 
           } else if(objType == 3){
             setTextLabelBackgroundColor(obj, backgroundColor);
-            
+
           }
 
+        } else if(strcmp(line->words[0], "textColor") == 0){
+          // Change Temp Var textColor
+          if(line->wordsLength > 3){
+            textColor[0] = atoi(line->words[1]);
+            textColor[1] = atoi(line->words[2]);
+            textColor[2] = atoi(line->words[3]);
+          }
+          if(line->wordsLength > 4)
+            textColor[3] = atoi(line->words[4]);
+
+          // If the object was already created
+          if(objType == 2){
+            setButtonTextColor(obj, textColor);
+
+          } else if(objType == 3){
+            setTextLabelTextColor(obj, textColor);
+
+          }
+
+        } else if(strcmp(line->words[0], "textSize") == 0){
+          // Change Temp Var textSize
+          if(line->wordsLength > 1)
+            textSize = atoi(line->words[1]);
+
+          // If the object was already created
+          if(objType == 2){
+            setButtonTextSize(obj, textSize);
+
+          } else if(objType == 3){
+            setTextLabelTextSize(obj, textSize);
+            
+          }
 
         } else if(strcmp(line->words[0], "objType") == 0){
           if(strcmp(line->words[1], "Window") == 0){
@@ -237,7 +272,7 @@ int main(int argc, char** argv)
 
           } else if(strcmp(line->words[1], "Button") == 0){
             // Create Button
-            ButtonLC *button = createButton(sizeX, sizeY, fp->fileName, &text, &onClickScript, &callLine, borderColor, backgroundColor);
+            ButtonLC *button = createButton(sizeX, sizeY, fp->fileName, &text, &onClickScript, &callLine, borderColor, backgroundColor, textColor, textSize);
             if(button == NULL){
               printf("Error Creating a Button");
               freeWindowLC(window);
@@ -252,7 +287,7 @@ int main(int argc, char** argv)
 
           } else if(strcmp(line->words[1], "TextLabel") == 0){
             // Create textLabel 
-            TextLabelLC *textLabel = createTextLabel(sizeX, sizeY, fp->fileName, &text, borderColor, backgroundColor);
+            TextLabelLC *textLabel = createTextLabel(sizeX, sizeY, fp->fileName, &text, borderColor, backgroundColor, textColor, textSize);
             if(textLabel == NULL){
               printf("Error Creating a Button");
               freeWindowLC(window);
@@ -321,7 +356,19 @@ int main(int argc, char** argv)
   if (!SDL_Init(SDL_INIT_VIDEO)){
     return -1;
   }
-  
+  if(!TTF_Init()){
+    SDL_Quit();
+    return -1;
+  }
+
+  // Load font
+  gameStruct->font = TTF_OpenFont("fonts/NerdFontMonoReg.ttf", 24.0f);
+  if (!gameStruct->font) {
+    SDL_Log("Failed to load font: %s", SDL_GetError());
+    return 1;
+  }
+
+
   // Main Loop
   SDL_Event event;
   
@@ -407,10 +454,12 @@ int main(int argc, char** argv)
 
   // Save Data
   saveHashmap("saveRessourceData", gameStruct->ressourceVars, getStrOfNumNotFormated);
-  
-  
+
+
   // Close All And Stop Program
   freeGameStruct();
+  TTF_CloseFont(gameStruct->font);
+  TTF_Quit();
   SDL_Quit();  
 
   return 0;

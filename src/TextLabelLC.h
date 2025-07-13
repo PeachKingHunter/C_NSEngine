@@ -19,11 +19,15 @@ typedef struct textLabelLC {
   char *text;  
   int *borderColor;
   int *backgroundColor;
+  int *textColor;
+  float textSize;
+  //int *textBorderColor;
+  //int textBorderSize;
   struct textLabelLC *next;
 } TextLabelLC;
 
 void freeTextLabels(TextLabelLC *textLabels);
-TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int *borderColor, int *backgroundColor);
+TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int *borderColor, int *backgroundColor, int *textColor, int textSize);
 
 // Getters
 int getTextLabelSizeX(TextLabelLC *tl);
@@ -36,5 +40,7 @@ char *getTextLabelText(TextLabelLC *tl);
 //Setters
 void setTextLabelBorderColor(TextLabelLC *tl, int borderColor[4]);
 void setTextLabelBackgroundColor(TextLabelLC *tl, int backgroundColor[4]);
+void setTextLabelTextColor(TextLabelLC *tl, int textColor[4]);
+void setTextLabelTextSize(TextLabelLC *tl, int textSize);
 
 #endif

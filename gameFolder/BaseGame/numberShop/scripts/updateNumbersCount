@@ -1,2 +1,2 @@
 .Update
-changeTextOf(numbersCount, "Numbers: " + number);
+changeTextOf(numbersCount, "Numbers:" + number);

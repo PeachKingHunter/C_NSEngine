@@ -46,6 +46,12 @@ GameStruct *getGameStruct(){
   return &gameStruct;
 }
 
+TTF_Font *getGameStructFont(){
+  GameStruct *gS = getGameStruct();
+  if(gS == NULL)
+    return NULL;
+  return gS->font;
+}
 
 ButtonLC *searchButton(WindowLC *windowLC, char *name){
   // Verif entry

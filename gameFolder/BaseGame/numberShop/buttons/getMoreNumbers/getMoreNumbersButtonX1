@@ -6,3 +6,5 @@ onClick: buyGetMoreNumbers
 text: "Buy x1"
 borderColor: 255 255 255
 backgroundColor: 111 111 111
+textColor 255 255 255 255
+textSize 6

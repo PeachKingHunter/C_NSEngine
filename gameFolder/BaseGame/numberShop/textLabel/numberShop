@@ -6,3 +6,5 @@ onClick: buyGetMoreNumbers
 text: "Number's Shop"
 borderColor: 255 255 255 0
 backgroundColor: 44 44 44 0
+textColor 255 255 255
+textSize 9

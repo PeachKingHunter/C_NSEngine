@@ -3,6 +3,7 @@
 
 #include "SDL3/SDL_video.h"
 #include "SDL3/SDL_render.h"
+#include <SDL3_ttf/SDL_ttf.h>
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -12,7 +13,8 @@
 #include "../Hachage/Hachage.h"
 #include "../BigNumberManager/BigNumberManager.h"
 
-#include "Render.h"
+//#include "Render.h"
+#include "WindowLC.h"
 
 typedef struct gameStruct {
   HashMap *globalVars;
@@ -22,6 +24,7 @@ typedef struct gameStruct {
   BigNumber *timeSec;
   BigNumber *nbFrame;
   BigNumber *delta;
+  TTF_Font *font;
 } GameStruct;
 
 GameStruct *getGameStruct();
@@ -31,6 +34,6 @@ FilePiece *searchObjectByName(Category *allCat, char *name, char *category);
 ButtonLC *searchButton(WindowLC *windowLC, char *name);
 TextLabelLC *searchTextLabel(WindowLC *windowLC, char *name);
 void *searchInstanceByName(WindowLC *windowLC, char *name, int *type);
-
+TTF_Font *getGameStructFont();
 #endif
 

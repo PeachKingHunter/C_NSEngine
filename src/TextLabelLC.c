@@ -10,6 +10,7 @@ void freeTextLabels(TextLabelLC *tlLC) {
 
     free(tlLC->borderColor);
     free(tlLC->backgroundColor);
+    free(tlLC->textColor);
 
     TextLabelLC *temp = tlLC;
     tlLC = tlLC->next;
@@ -17,7 +18,7 @@ void freeTextLabels(TextLabelLC *tlLC) {
   }
 }
 
-TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int *borderColor, int *backgroundColor){
+TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int *borderColor, int *backgroundColor, int *textColor, int textSize){
   TextLabelLC *textLabel = (TextLabelLC *) malloc(sizeof(TextLabelLC));
   if(textLabel == NULL){
     return NULL;
@@ -41,6 +42,16 @@ TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text, int 
     textLabel->backgroundColor[2] = backgroundColor[2];
     textLabel->backgroundColor[3] = backgroundColor[3];
   }
+
+  textLabel->textColor = (int *) malloc(sizeof(int) * 4);
+  if(textLabel->textColor != NULL){
+    textLabel->textColor[0] = textColor[0];
+    textLabel->textColor[1] = textColor[1];
+    textLabel->textColor[2] = textColor[2];
+    textLabel->textColor[3] = textColor[3];
+  }
+
+  textLabel->textSize = ((float)textSize) / 10.;
 
   if(*text == NULL){
     textLabel->text = (char *) malloc(sizeof(char) * 1);
@@ -117,4 +128,21 @@ void setTextLabelBackgroundColor(TextLabelLC *tl, int backgroundColor[4]){
   tl->backgroundColor[1] = backgroundColor[1];
   tl->backgroundColor[2] = backgroundColor[2];
   tl->backgroundColor[3] = backgroundColor[3];
+}
+
+void setTextLabelTextColor(TextLabelLC *tl, int textColor[4]){
+  if(tl ==NULL || textColor == NULL)
+    return;
+
+  tl->textColor[0] = textColor[0];
+  tl->textColor[1] = textColor[1];
+  tl->textColor[2] = textColor[2];
+  tl->textColor[3] = textColor[3];
+}
+
+void setTextLabelTextSize(TextLabelLC *tl, int textSize){
+  if(tl ==NULL)
+    return;
+
+  tl->textSize = ((float) textSize) / 10;
 }
