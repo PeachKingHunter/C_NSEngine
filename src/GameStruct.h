@@ -1,19 +1,19 @@
 #ifndef GAMESTRUCT_H
 #define GAMESTRUCT_H
 
-#include "SDL3/SDL_video.h"
 #include "SDL3/SDL_render.h"
+#include "SDL3/SDL_video.h"
 #include <SDL3_ttf/SDL_ttf.h>
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-#include "../Parser/Parser.h"
-#include "../Hachage/Hachage.h"
 #include "../BigNumberManager/BigNumberManager.h"
+#include "../Hachage/Hachage.h"
+#include "../Parser/Parser.h"
 
-//#include "Render.h"
+// #include "Render.h"
 #include "WindowLC.h"
 
 typedef struct gameStruct {
@@ -36,4 +36,3 @@ TextLabelLC *searchTextLabel(WindowLC *windowLC, char *name);
 void *searchInstanceByName(WindowLC *windowLC, char *name, int *type);
 TTF_Font *getGameStructFont();
 #endif
-

@@ -1,7 +1,7 @@
 #include "ButtonLC.h"
 
 void freeButtons(ButtonLC *buttons) {
-  while(buttons != NULL){
+  while (buttons != NULL) {
     freeTextLabels(buttons->tl);
 
     freeFilePiece(buttons->onClickScript);
@@ -13,9 +13,13 @@ void freeButtons(ButtonLC *buttons) {
   }
 }
 
-ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text, FilePiece **onClickScript, Line **callLine, int *borderColor, int *backgroundColor, int *textColor, int textSize){
-  ButtonLC *button = (ButtonLC *) malloc(sizeof(ButtonLC));
-  button->tl = createTextLabel(sizeX, sizeY, name, text, borderColor, backgroundColor, textColor, textSize);
+ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text,
+                       FilePiece **onClickScript, Line **callLine,
+                       int *borderColor, int *backgroundColor, int *textColor,
+                       int textSize) {
+  ButtonLC *button = (ButtonLC *)malloc(sizeof(ButtonLC));
+  button->tl = createTextLabel(sizeX, sizeY, name, text, borderColor,
+                               backgroundColor, textColor, textSize);
   button->onClickScript = *onClickScript;
   *onClickScript = NULL;
   button->callLine = *callLine;
@@ -24,73 +28,73 @@ ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text, FilePiece 
   return button;
 }
 
-int getButtonSizeX(ButtonLC *button){
-  if(button == NULL)
+int getButtonSizeX(ButtonLC *button) {
+  if (button == NULL)
     return -1;
 
   return getTextLabelSizeX(button->tl);
 }
 
-int getButtonSizeY(ButtonLC *button){
-  if(button == NULL)
+int getButtonSizeY(ButtonLC *button) {
+  if (button == NULL)
     return -1;
 
   return getTextLabelSizeY(button->tl);
 }
 
-int getButtonPosX(ButtonLC *button){
-  if(button == NULL)
+int getButtonPosX(ButtonLC *button) {
+  if (button == NULL)
     return -1;
 
   return getTextLabelPosX(button->tl);
 }
 
-int getButtonPosY(ButtonLC *button){
-  if(button == NULL)
+int getButtonPosY(ButtonLC *button) {
+  if (button == NULL)
     return -1;
 
   return getTextLabelPosY(button->tl);
 }
 
-char *getButtonName(ButtonLC *button){
-  if(button == NULL)
+char *getButtonName(ButtonLC *button) {
+  if (button == NULL)
     return NULL;
 
   return getTextLabelName(button->tl);
 }
 
-char *getButtonText(ButtonLC *button){
-  if(button == NULL)
+char *getButtonText(ButtonLC *button) {
+  if (button == NULL)
     return NULL;
 
   return getTextLabelText(button->tl);
 }
 
 // Setters
-void setButtonBorderColor(ButtonLC *button, int borderColor[4]){
-  if(button == NULL)
-    return ;
+void setButtonBorderColor(ButtonLC *button, int borderColor[4]) {
+  if (button == NULL)
+    return;
 
   setTextLabelBorderColor(button->tl, borderColor);
 }
 
-void setButtonBackgroundColor(ButtonLC *button, int backgroundColor[4]){
-  if(button == NULL)
-    return ;
+void setButtonBackgroundColor(ButtonLC *button, int backgroundColor[4]) {
+  if (button == NULL)
+    return;
 
   setTextLabelBackgroundColor(button->tl, backgroundColor);
 }
 
-void setButtonTextColor(ButtonLC *button, int textColor[4]){
-  if(button == NULL)
-    return ;
+void setButtonTextColor(ButtonLC *button, int textColor[4]) {
+  if (button == NULL)
+    return;
 
   setTextLabelTextColor(button->tl, textColor);
 }
 
-void setButtonTextSize(ButtonLC *button, int TextSize){
-  if(button == NULL)
-    return ;
+void setButtonTextSize(ButtonLC *button, int TextSize) {
+  if (button == NULL)
+    return;
 
   setTextLabelTextSize(button->tl, TextSize);
 }

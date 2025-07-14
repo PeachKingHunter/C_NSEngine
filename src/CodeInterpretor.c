@@ -1,31 +1,30 @@
 #include "CodeInterpretor.h"
 
-void clickLeftMouse(WindowLC *windowLC, float posX, float posY, SDL_WindowID windowID){
+void clickLeftMouse(WindowLC *windowLC, float posX, float posY,
+                    SDL_WindowID windowID) {
   // Verif entry
-  if(windowLC == NULL)
+  if (windowLC == NULL)
     return;
 
   // Only on visible windows
-  if(windowLC->isVisible == 0) {
+  if (windowLC->isVisible == 0) {
     clickLeftMouse(windowLC->next, posX, posY, windowID);
-    return ;
+    return;
   }
 
-  if(SDL_GetWindowID(windowLC->window) != windowID){
+  if (SDL_GetWindowID(windowLC->window) != windowID) {
     clickLeftMouse(windowLC->next, posX, posY, windowID);
-    return ;
+    return;
   }
 
-  // Detect click in button 
+  // Detect click in button
   ButtonLC *button = windowLC->buttons;
-  while(button != NULL){
-    if(posX > getButtonPosX(button) 
-      && posY > getButtonPosY(button) 
-      && posX < getButtonPosX(button) + getButtonSizeX(button) 
-      && posY < getButtonPosY(button) + getButtonSizeY(button))
-    {
-      //printf("Button clicked\n");
-      executeCode(button->onClickScript, button->callLine, NULL); 
+  while (button != NULL) {
+    if (posX > getButtonPosX(button) && posY > getButtonPosY(button) &&
+        posX < getButtonPosX(button) + getButtonSizeX(button) &&
+        posY < getButtonPosY(button) + getButtonSizeY(button)) {
+      // printf("Button clicked\n");
+      executeCode(button->onClickScript, button->callLine, NULL);
     }
     button = button->next;
   }
@@ -34,64 +33,62 @@ void clickLeftMouse(WindowLC *windowLC, float posX, float posY, SDL_WindowID win
   clickLeftMouse(windowLC->next, posX, posY, windowID);
 }
 
-
-void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
+void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
   // Verif entry
-  if(code == NULL)
-    return ;
+  if (code == NULL)
+    return;
 
-  //Create hashmap for variables
+  // Create hashmap for variables
   HashMap *map = hashmap_create();
   GameStruct *gameStruct = getGameStruct();
 
-  //Parametres
+  // Parametres
   int i = 2;
-  if(callLine != NULL){
-    while(i+1 < callLine->wordsLength){
+  if (callLine != NULL) {
+    while (i + 1 < callLine->wordsLength) {
       // Resolve local variable
-      BigNumber *val = getVar(beforeLocalVar, callLine, i+1);
-      if(val != NULL){
+      BigNumber *val = getVar(beforeLocalVar, callLine, i + 1);
+      if (val != NULL) {
         BigNumber *copy = copyNum(val);
-        if(copy == NULL)
+        if (copy == NULL)
           continue;
         hashmap_insert(map, callLine->words[i], copy, deleteNum);
       } else {
-        BigNumber *val = createNumByConst(callLine->words[i+1]);
+        BigNumber *val = createNumByConst(callLine->words[i + 1]);
         hashmap_insert(map, callLine->words[i], val, deleteNum);
       }
-      i+=2; //Key and value
+      i += 2; // Key and value
     }
   }
 
-  //printf("\n--execute Script--\n");
-  // Execute lines
-  for(int i=0; i < code->nbLine; i++){
-    Line *line =code->data[i];
-    if(line != NULL){
-      if(line->wordsLength > 0){
+  // printf("\n--execute Script--\n");
+  //  Execute lines
+  for (int i = 0; i < code->nbLine; i++) {
+    Line *line = code->data[i];
+    if (line != NULL) {
+      if (line->wordsLength > 0) {
 
         // Write in the console for debugging
-        if(strcmp("printf", line->words[0]) == 0){
-          for(int j=1; j < line->wordsLength; j++){
+        if (strcmp("printf", line->words[0]) == 0) {
+          for (int j = 1; j < line->wordsLength; j++) {
 
             BigNumber *val = getVar(map, line, j);
-            if(val == NULL){
+            if (val == NULL) {
               printf("%s ", line->words[j]);
 
             } else {
               printNum(val);
-
             }
-
           }
           printf("\n");
 
-        // Change the text of an button
-        } else if(strcmp("changeTextOf", line->words[0]) == 0){ //TODO WORK
-          // Get The button and textLabel 
+          // Change the text of an button
+        } else if (strcmp("changeTextOf", line->words[0]) == 0) { // TODO WORK
+          // Get The button and textLabel
           ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
-          TextLabelLC *tl = searchTextLabel(gameStruct->windows, line->words[1]);
-          if(button == NULL && tl == NULL){
+          TextLabelLC *tl =
+              searchTextLabel(gameStruct->windows, line->words[1]);
+          if (button == NULL && tl == NULL) {
             printf("Button AND TextLabel NOT Found\n");
             continue;
           }
@@ -100,19 +97,19 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           char buffer[500];
           int index = 0;
           buffer[index] = '\0';
-          for(int i=2; i < line->wordsLength; i++){
+          for (int i = 2; i < line->wordsLength; i++) {
             // the buffer have a limited size
-            if(strlen(line->words[i]) - 1 + index > 500)
+            if (strlen(line->words[i]) - 1 + index > 500)
               break;
-  
+
             // Copy each string
             BigNumber *val = getVar(map, line, i);
-            if(val == NULL){
-              strcpy(buffer+index, line->words[i]);
+            if (val == NULL) {
+              strcpy(buffer + index, line->words[i]);
               index += strlen(line->words[i]);
             } else {
               char *string = getStrOfNum(val);
-              strcpy(buffer+index, string);
+              strcpy(buffer + index, string);
               index += strlen(string);
               free(string);
             }
@@ -122,143 +119,147 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           buffer[index] = '\0';
 
           // Change the text
-          if(button != NULL){
+          if (button != NULL) {
             free(button->tl->text);
             button->tl->text = strdup(buffer);
 
-          } else if (tl != NULL){
+          } else if (tl != NULL) {
             free(tl->text);
             tl->text = strdup(buffer);
-
           }
-        
-        // call an other script
-        } else if(strcmp("startScript", line->words[0]) == 0){
 
-          FilePiece *toStartScript = searchObjectByName(gameStruct->allCategories, line->words[1], "Script");
-          executeCode(toStartScript, line, map); 
+          // call an other script
+        } else if (strcmp("startScript", line->words[0]) == 0) {
+
+          FilePiece *toStartScript = searchObjectByName(
+              gameStruct->allCategories, line->words[1], "Script");
+          executeCode(toStartScript, line, map);
 
           // Create an integer variable
-        } else if(strcmp("int", line->words[0]) == 0){
-          if(line->wordsLength == 2){
+        } else if (strcmp("int", line->words[0]) == 0) {
+          if (line->wordsLength == 2) {
             hashmap_insert(map, line->words[1], createEmptyNum(0), deleteNum);
 
-          } else if(line->wordsLength == 3){
+          } else if (line->wordsLength == 3) {
             BigNumber *tmpN = getVar(map, line, 2);
-            if(tmpN != NULL){
+            if (tmpN != NULL) {
               hashmap_insert(map, line->words[1], copyNum(tmpN), deleteNum);
 
             } else {
-              hashmap_insert(map, line->words[1], createNumByConst(line->words[2]), deleteNum);
-
+              hashmap_insert(map, line->words[1],
+                             createNumByConst(line->words[2]), deleteNum);
             }
 
           } else {
             printf("Too few or too many arg for int variable\n");
-
           }
-        } else if(strcmp("intG", line->words[0]) == 0){
-          if(line->wordsLength == 2){
-            hashmap_insert(gameStruct->globalVars, line->words[1], createEmptyNum(0), deleteNum);
+        } else if (strcmp("intG", line->words[0]) == 0) {
+          if (line->wordsLength == 2) {
+            hashmap_insert(gameStruct->globalVars, line->words[1],
+                           createEmptyNum(0), deleteNum);
 
-          } else if(line->wordsLength == 3){
+          } else if (line->wordsLength == 3) {
             BigNumber *tempN = getVar(map, line, 2);
-            if(tempN == NULL){
-              hashmap_insert(gameStruct->globalVars, line->words[1], createNumByConst(line->words[2]), deleteNum); 
+            if (tempN == NULL) {
+              hashmap_insert(gameStruct->globalVars, line->words[1],
+                             createNumByConst(line->words[2]), deleteNum);
 
             } else {
-              hashmap_insert(gameStruct->globalVars, line->words[1], copyNum(tempN), deleteNum);      
-
+              hashmap_insert(gameStruct->globalVars, line->words[1],
+                             copyNum(tempN), deleteNum);
             }
 
           } else {
             printf("Too few or too many arg for int variable\n");
-
           }
 
-        // if operator
-        } else if(strcmp("if", line->words[0]) == 0){
+          // if operator
+        } else if (strcmp("if", line->words[0]) == 0) {
           int res = resolveCondition(line, 1, map);
 
           // Skip to the end of the if loop
           int neededEnd = 0;
-          if(res == 0)
+          if (res == 0)
             neededEnd++;
 
-          while(neededEnd > 0){
+          while (neededEnd > 0) {
             i++;
-            if(i >= code->nbLine)
+            if (i >= code->nbLine)
               break;
 
             line = code->data[i];
-            if(strcmp(line->words[0], "if") == 0){
+            if (strcmp(line->words[0], "if") == 0) {
               neededEnd++;
 
-            } else if(strcmp(line->words[0], "end") == 0 || line->words[0][0] == '}'){
+            } else if (strcmp(line->words[0], "end") == 0 ||
+                       line->words[0][0] == '}') {
               neededEnd--;
-
             }
           }
 
-        // load an variable and if not exist, create it.
-        } else if(strcmp("loadOrCreate", line->words[0]) == 0){
-          //TODO
-          //char *val = NULL;
-          if(line->wordsLength == 4){
-            hashmap_insert(gameStruct->ressourceVars, line->words[2], createNumByConst(line->words[3]), deleteNum);
-            
+          // load an variable and if not exist, create it.
+        } else if (strcmp("loadOrCreate", line->words[0]) == 0) {
+          // TODO
+          // char *val = NULL;
+          if (line->wordsLength == 4) {
+            hashmap_insert(gameStruct->ressourceVars, line->words[2],
+                           createNumByConst(line->words[3]), deleteNum);
+
           } else {
             printf("Too few or too many arg for loadOrCreate variable\n");
-
           }
 
-        } else if(strcmp("setSizeOf", line->words[0]) == 0 && line->wordsLength == 4){
+        } else if (strcmp("setSizeOf", line->words[0]) == 0 &&
+                   line->wordsLength == 4) {
           int type = 0;
-          void *instance = searchInstanceByName(gameStruct->windows, line->words[1], &type);
-          if(instance == NULL || type == -1)
+          void *instance =
+              searchInstanceByName(gameStruct->windows, line->words[1], &type);
+          if (instance == NULL || type == -1)
             continue;
 
-          if(type == 2){
+          if (type == 2) {
             ButtonLC *button = instance;
 
             // For sizeX
             BigNumber *tmpN = getVar(map, line, 2);
-            if(tmpN != NULL){
+            if (tmpN != NULL) {
               char *str = getStrOfNumNotFormated(tmpN);
-              if(str != NULL){
+              if (str != NULL) {
                 button->tl->sizeX = atoi(str);
                 free(str);
               }
 
-            } else if(line->words[2][0] < '9' && line->words[2][0] > '0'){
+            } else if (line->words[2][0] < '9' && line->words[2][0] > '0') {
               button->tl->sizeX = atoi(line->words[2]);
-
             }
 
-            //TODO For sizeY
+            // TODO For sizeY
 
-          } else if(type == 3){
+          } else if (type == 3) {
             TextLabelLC *tl = instance;
             // For sizeX
             BigNumber *tmpN = getVar(map, line, 2);
-            if(tmpN != NULL){
+            if (tmpN != NULL) {
               char *str = getStrOfNumNotFormated(tmpN);
-              if(str != NULL){
+              if (str != NULL) {
                 tl->sizeX = atoi(str);
                 free(str);
               }
 
-            } else if(line->words[2][0] < '9' && line->words[2][0] > '0'){
+            } else if (line->words[2][0] < '9' && line->words[2][0] > '0') {
               tl->sizeX = atoi(line->words[2]);
-
             }
 
-
-            //TODO Like above
+            // TODO Like above
           }
 
-        // Arithmetic operator 
-        } else if((strcmp("add", line->words[0]) == 0 || strcmp("set", line->words[0]) == 0 || strcmp("minus", line->words[0]) == 0 || strcmp("mult", line->words[0]) == 0) && line->wordsLength == 3){
+          // Arithmetic operator
+        } else if ((strcmp("add", line->words[0]) == 0 ||
+                    strcmp("set", line->words[0]) == 0 ||
+                    strcmp("minus", line->words[0]) == 0 ||
+                    strcmp("div", line->words[0]) == 0 ||
+                    strcmp("mult", line->words[0]) == 0) &&
+                   line->wordsLength == 3) {
 
           BigNumber *var1 = NULL;
           BigNumber *var2 = NULL;
@@ -266,23 +267,25 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
 
           // Resolving variables
           var1 = getVar(map, line, 1);
-          if(var1 == NULL)
+          if (var1 == NULL)
             continue;
 
           var2 = getVar(map, line, 2);
-          if(var2 == NULL){
+          if (var2 == NULL) {
             var2 = createNumByConst(line->words[2]);
-            //var2 = createNumByConst("10");
+            // var2 = createNumByConst("10");
             var2IsToFree = 1;
           }
 
-          if(strcmp("add", line->words[0]) == 0)
+          if (strcmp("add", line->words[0]) == 0)
             addNumInto(var1, var2);
-          if(strcmp("mult", line->words[0]) == 0)
+          if (strcmp("mult", line->words[0]) == 0)
             multNumInto(var1, var2);
-          if(strcmp("minus", line->words[0]) == 0)
+          if (strcmp("div", line->words[0]) == 0)
+            divNumInto(var1, var2);
+          if (strcmp("minus", line->words[0]) == 0)
             minusNumInto(var1, var2);
-          if(strcmp("set", line->words[0]) == 0){
+          if (strcmp("set", line->words[0]) == 0) {
             free(var1->number);
             var1->number = strdup(var2->number);
             var1->size = var2->size;
@@ -290,20 +293,24 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           }
 
           // Clearing temp variables
-          if(var2IsToFree == 1)
+          if (var2IsToFree == 1)
             deleteNum(var2);
 
-
-        } else if(strcmp("randInto", line->words[0]) == 0 && line->wordsLength >= 4){
+        } else if (strcmp("randInto", line->words[0]) == 0 &&
+                   line->wordsLength >= 4) {
           BigNumber *var1 = getVar(map, line, 1);
           // If Var Not Exist
-          if(var1 == NULL){
-            hashmap_insert(map, line->words[1], createSmallRandomNumber(atoi(line->words[2]), atoi(line->words[3])), deleteNum);
+          if (var1 == NULL) {
+            hashmap_insert(map, line->words[1],
+                           createSmallRandomNumber(atoi(line->words[2]),
+                                                   atoi(line->words[3])),
+                           deleteNum);
             continue;
           }
           // If Var Exist change it
-          BigNumber *temp = createSmallRandomNumber(atoi(line->words[2]), atoi(line->words[3]));
-          if(temp == NULL){
+          BigNumber *temp = createSmallRandomNumber(atoi(line->words[2]),
+                                                    atoi(line->words[3]));
+          if (temp == NULL) {
             printf("Error randInto\n");
             continue;
           }
@@ -312,9 +319,7 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
           var1->usedSize = temp->usedSize;
           var1->size = temp->size;
           free(temp);
-
         }
-
       }
     }
   }
@@ -323,12 +328,12 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar){
   hashmap_destroy(map, deleteNum);
 }
 
-int resolveCondition(Line *line, int start, HashMap *vars){
+int resolveCondition(Line *line, int start, HashMap *vars) {
   // Verif entries
-  if(line == NULL || vars == NULL)
+  if (line == NULL || vars == NULL)
     return -1;
 
-  if(line->wordsLength < start+3)
+  if (line->wordsLength < start + 3)
     return -1;
 
   // Variables
@@ -341,30 +346,30 @@ int resolveCondition(Line *line, int start, HashMap *vars){
 
   // Resolving variables
   var1 = getVar(vars, line, start);
-  if(var1 == NULL){
+  if (var1 == NULL) {
     var1 = createNumByConst(line->words[start]);
     var1IsToFree = 1;
-  }  
-  var2 = getVar(vars, line, start+2);
-  if(var2 == NULL){
-    var2 = createNumByConst(line->words[start+2]);
+  }
+  var2 = getVar(vars, line, start + 2);
+  if (var2 == NULL) {
+    var2 = createNumByConst(line->words[start + 2]);
     var2IsToFree = 1;
   }
 
   // Conditions
-  if(line->words[start+1][0] == '='){
+  if (line->words[start + 1][0] == '=') {
     res = areNumsEqual(var1, var2);
-  } else if(line->words[start+1][0] == '<'){
+  } else if (line->words[start + 1][0] == '<') {
     res = isNumInf(var1, var2);
-  } else if(line->words[start+1][0] == '>'){
+  } else if (line->words[start + 1][0] == '>') {
     res = isNumSup(var1, var2);
   }
 
   // Clearing temp variables
-  if(var1IsToFree == 1)
+  if (var1IsToFree == 1)
     deleteNum(var1);
 
-  if(var2IsToFree == 1)
+  if (var2IsToFree == 1)
     deleteNum(var2);
 
   // Return result of condition resolving
@@ -372,12 +377,12 @@ int resolveCondition(Line *line, int start, HashMap *vars){
 }
 
 // Get varaible by an string if exist
-BigNumber *getVar(HashMap *vars, Line *line, int j){
+BigNumber *getVar(HashMap *vars, Line *line, int j) {
   // Verif entries
-  if(line == NULL)
+  if (line == NULL)
     return NULL;
 
-  if(line->wordsLength < j || j < 0){
+  if (line->wordsLength < j || j < 0) {
     printf("Error get var line not have j word\n");
     return NULL;
   }
@@ -385,33 +390,32 @@ BigNumber *getVar(HashMap *vars, Line *line, int j){
   // Get game struct
   GameStruct *gameStruct = getGameStruct();
 
-  // Priority for preBuilt variables, local variables, global and ressource in last  
-  if(strcmp(line->words[j], "time") == 0){
+  // Priority for preBuilt variables, local variables, global and ressource in
+  // last
+  if (strcmp(line->words[j], "time") == 0) {
     return gameStruct->timeSec;
   }
 
-  if(strcmp(line->words[j], "delta") == 0)
+  if (strcmp(line->words[j], "delta") == 0)
     return gameStruct->delta;
 
-  if(strcmp(line->words[j], "nbFrame") == 0)
+  if (strcmp(line->words[j], "nbFrame") == 0)
     return gameStruct->nbFrame;
 
   void *val = NULL;
-  if(vars != NULL){
+  if (vars != NULL) {
     val = hashmap_get(vars, line->words[j]);
-    if(val != NULL)
+    if (val != NULL)
       return val;
-
   }
 
-  val = hashmap_get(gameStruct->globalVars, line->words[j]);           
-  if(val != NULL)
+  val = hashmap_get(gameStruct->globalVars, line->words[j]);
+  if (val != NULL)
     return val;
 
   val = hashmap_get(gameStruct->ressourceVars, line->words[j]);
-  if(val != NULL)
+  if (val != NULL)
     return val;
 
   return NULL;
 }
-

@@ -419,6 +419,34 @@ BigNumber *multNumInto(BigNumber *num1, BigNumber *num2){
   return num1;
 }
 
+BigNumber *divNumInto(BigNumber *num1, BigNumber *num2){
+  if(!num1 || !num2)
+    return NULL;
+
+  //if(num2 == 0 Case TODO
+
+  BigNumber *res = createEmptyNum(5);
+  if(res == NULL)
+    return NULL;
+
+  BigNumber *one = createNumByConst("1");
+  if(one == NULL){
+    deleteNum(res);
+    return NULL;
+  }
+  while(isNumSup(num1, num2) || areNumsEqual(num1, num2)){
+    addNumInto(res, one);
+    minusNumInto(num1, num2);   
+  }
+
+  num1->size = res->size;
+  num1->usedSize = res->usedSize;
+  free(num1->number);
+  num1->number = res->number;
+  free(res);
+  deleteNum(one);
+  return num1;
+}
 
 void deleteNum(void *num){
   if(num == NULL)
@@ -582,7 +610,6 @@ int isNumSup(BigNumber *num1, BigNumber *num2){
 
   }
 
-  printf("isNumSup: Egal je crois pas sûre");
   return 0;
 }
 

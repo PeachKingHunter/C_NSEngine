@@ -33,6 +33,7 @@ void deleteNum(void *num);
 BigNumber *addNumInto(BigNumber *num1, BigNumber *num2);
 BigNumber *minusNumInto(BigNumber *nu1, BigNumber *num2);
 BigNumber *multNumInto(BigNumber *nu1, BigNumber *num2);
+BigNumber *divNumInto(BigNumber *num1, BigNumber *num2);
 
 // Comparison
 int areNumsEqual(BigNumber *num1, BigNumber *num2);

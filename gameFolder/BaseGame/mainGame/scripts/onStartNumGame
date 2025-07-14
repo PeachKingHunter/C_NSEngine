@@ -1,6 +1,6 @@
 .Start
 // Create mains variables for the game
-loadOrCreate "NumberResource" number 0;
+loadOrCreate "NumberResource" number 1000;
 intG numGamePos 5;
 intG actuGameNum 1;
 intG lastResetFrame nbFrame;

@@ -5,6 +5,13 @@ intG lastTime = time;
 int timeNum nbFrame;
 minus timeNum lastResetFrame;
 mult timeNum actuGameNum;
+
+mult timeNum 2
+div timeNum 3;
+
+mult timeNum 10;
+div timeNum numberGetWaitingTime;
+
 setSizeOf timeBackground timeNum same;
 
 // Reset on time passed

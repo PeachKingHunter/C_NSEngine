@@ -1,6 +1,8 @@
 .Start
-printf("NUMBER'S SHOP TODO");
 loadOrCreate "numberGetMoreNumbers" numberGetMoreNumbers 0;
-loadOrCreate "numberGetMoreNumbersQuant" numberGetMoreNumbersQuant 0;
-loadOrCreate "numberGetMoreNumbersPrice" numberGetMoreNumbersPrice 10;
+loadOrCreate "numberGetMoreNumbersQuant" numberGetMoreNumbersQuant 1;
+loadOrCreate "numberGetMoreNumbersPrice" numberGetMoreNumbersPrice 100;
 
+loadOrCreate "numberGetWaitingTime" numberGetWaitingTime 10;
+loadOrCreate "numberGetWaitingTimeQuant" numberGetWaitingTimeQuant 1;
+loadOrCreate "numberGetWaitingTimePrice" numberGetWaitingTimePrice 125;
