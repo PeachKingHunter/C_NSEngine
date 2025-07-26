@@ -26,7 +26,7 @@ char *getStrOfNum(BigNumber *num);
 char *getStrOfNumNotFormated(void *num);
 
 int calculateUsedSize(BigNumber *number);
-int max(int n1, int n2);
+int maxInt(int n1, int n2);
 void deleteNum(void *num);
 
 // Arithmetic

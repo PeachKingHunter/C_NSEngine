@@ -1,50 +1,61 @@
 all: main
 
-obj = obj/
+
+# To Change for your OS
+# For linux
+cc = gcc 
+# For windows
+#cc = i686-w64-mingw32-gcc  
+
+
+lib = -LSDL3/lib 
+include = -ISDL3/include
+
+obj = target/obj/
 
 # Compile Libraries
 $(obj)Parser.o: Parser/Parser.c Parser/Parser.h
-	gcc -Wall -c -o $@ $<
+	$(cc)  -Wall -c -o $@ $<
 
 $(obj)BigNumberManager.o: BigNumberManager/BigNumberManager.c BigNumberManager/BigNumberManager.h
-	gcc -Wall -c -o $@ $<
-
+	$(cc) -Wall -c -o $@ $<
 
 $(obj)Hachage.o: Hachage/Hachage.c Hachage/Hachage.h
-	gcc -Wall -c -o $@ $<
-
+	$(cc) -Wall -c -o $@ $<
 
 # Compile project files
 $(obj)ButtonLC.o: src/ButtonLC.c src/ButtonLC.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 $(obj)TextLabelLC.o: src/TextLabelLC.c src/TextLabelLC.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 $(obj)WindowLC.o: src/WindowLC.c src/WindowLC.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 $(obj)GameStruct.o: src/GameStruct.c src/GameStruct.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 $(obj)CodeInterpretor.o: src/CodeInterpretor.c src/CodeInterpretor.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 $(obj)Render.o: src/Render.c src/Render.h
-	gcc -Wall -c -o $@ $<
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 
 # Create and compile the main
 $(obj)GamePackages.o: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o
-	ld -r -o $@ $^
+	$(cc) -r -o $@ $^
 
 main: main.c $(obj)Parser.o  $(obj)Hachage.o $(obj)BigNumberManager.o $(obj)GamePackages.o
-	gcc -Wall -o $@ $^ -lSDL3 -lSDL3_ttf
+	$(cc) -Wall -o target/$@ $^ -lSDL3 -lSDL3_ttf $(lib) $(include)
 
 
-# Running commands
+# For execute juste open the main or main.exe
+
+# Compile Running && Tests commands (configured for linux because I use linux)
 run: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o main
-	./main
+	./target/main
 
 runVerif: main
 	valgrind --suppressions=SDL3_Errors.supp --leak-check=full --show-leak-kinds=all ./main
@@ -52,6 +63,9 @@ runVerif: main
 runGenSupp: main
 	valgrind --gen-suppressions=all --leak-check=full --show-leak-kinds=all ./main 2> valgrind_output.log
 	sed -n '/^{/,/^}/p' valgrind_output.log > SDL3_Errors.supp
+	rm valgrind_output.log
 
 clean:
-	rm obj/*
+	rm target/obj/*
+	rm target/main
+	rm target/main.exe

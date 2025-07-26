@@ -197,7 +197,7 @@ int isEqualToZero(BigNumber *number) {
 }
 
 
-int max(int n1, int n2){
+int maxInt(int n1, int n2){
   if (n1 > n2)
     return n1;
   return n2;
@@ -209,7 +209,7 @@ BigNumber *addNumInto(BigNumber *num1, BigNumber *num2){
     return NULL;
 
   // Calculate the size needed in num1 for the adding.
-  int resSize = max(num1->usedSize, num2->usedSize);
+  int resSize = maxInt(num1->usedSize, num2->usedSize);
 
   // Variables for after
   num1->usedSize = resSize;
@@ -275,7 +275,7 @@ BigNumber *addNumInto(BigNumber *num1, BigNumber *num2){
     i++;
   }
   
-  i = max(i, j);
+  i = maxInt(i, j);
 
   // In the case where the number increase in size
   if(cout != 0){
@@ -374,7 +374,7 @@ BigNumber *minusNumInto(BigNumber *num1, BigNumber *num2){
     i++;
   }
  
-  i = max(i, j); 
+  i = maxInt(i, j); 
 
   // fill empty slot
   while(resNum[i] != '.' && resNum[i] != '\0'){

@@ -307,6 +307,8 @@ int main(int argc, char **argv) {
       fp = fp->next;
     }
   }
+
+
   Category *tempCat = allCategories;
   if (tempCat != NULL) {
     if (strcmp(tempCat->name, "Info") == 0) {

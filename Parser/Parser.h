@@ -6,6 +6,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+#ifdef _WIN32
+  #include <windows.h>
+#else
+  #include <dirent.h>
+  #include <sys/stat.h>
+#endif
+
+
 // Structure for a line
 typedef struct line{
   char **words;
@@ -27,6 +35,7 @@ typedef struct Category{
 } Category;
 
 // Other
+char *strndup(const char *s, size_t n);
 Category *fuseCategory(Category *cat1, Category *cat2);
 Category *searchCategory(Category *allCategories, char *name);
 void printCategories(Category *category);
@@ -34,7 +43,7 @@ Line *copyLine(Line *line);
 FilePiece *copyFilePiece(FilePiece *fp);
 
 // Parsing
-Category *parse(char *dirPath);
+Category *parse(const char *dirPath);
 Category *parseFile(char *file);
 Line *parseLine(char *string);
 
@@ -46,3 +55,10 @@ void freeFilePiece(FilePiece *fp);
 
 #endif
 
+//struct dirent {
+    //ino_t          d_ino;       /* numéro d'un nœud */
+    //off_t          d_off;       /* décalage jusqu'à la dirent suivante */
+    //unsigned short d_reclen;    /* longueur de cet enregistrement */
+    //unsigned char  d_type;      /* type du fichier */
+    //char           d_name[256]; /* nom du fichier */
+//};
