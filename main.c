@@ -9,6 +9,7 @@
 #include "src/GameStruct.h"
 #include "src/Render.h"
 
+#include <stdbool.h>
 #include <time.h>
 
 // Warning the wait is rounded exemple: 1000/60 = 16.66 -> 16 or 17 IDK
@@ -409,7 +410,7 @@ int main(int argc, char **argv) {
         break;
       case SDL_EVENT_MOUSE_BUTTON_UP:
         SDL_MouseButtonEvent mouseButtonEvent = event.button;
-        if (mouseButtonEvent.button == 1) {
+        if (mouseButtonEvent.button == 1 && mouseButtonEvent.down == false) {
           clickLeftMouse(window, mouseButtonEvent.x, mouseButtonEvent.y,
                          mouseButtonEvent.windowID);
         }

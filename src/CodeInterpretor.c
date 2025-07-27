@@ -1,4 +1,5 @@
 #include "CodeInterpretor.h"
+#include <stdio.h>
 
 void clickLeftMouse(WindowLC *windowLC, float posX, float posY,
                     SDL_WindowID windowID) {
@@ -83,11 +84,14 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
           printf("\n");
 
           // Change the text of an button
-        } else if (strcmp("changeTextOf", line->words[0]) == 0) { // TODO WORK
+        } else if (strcmp("stopScript", line->words[0]) == 0) {
+          break;
+
+        } else if (strcmp("changeTextOf", line->words[0]) == 0) {
           // Get The button and textLabel
           ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
           TextLabelLC *tl =
-              searchTextLabel(gameStruct->windows, line->words[1]);
+            searchTextLabel(gameStruct->windows, line->words[1]);
           if (button == NULL && tl == NULL) {
             printf("Button AND TextLabel NOT Found\n");
             continue;
@@ -127,12 +131,34 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
             free(tl->text);
             tl->text = strdup(buffer);
           }
+        } else if (strcmp("changeBackgroundColorOf", line->words[0]) == 0) {
+          // Get The button or textLabel
+          ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
+          TextLabelLC *tl = NULL;
+          if(button != NULL)
+            tl = button->tl;
 
-          // call an other script
+          if(tl == NULL)
+            tl = searchTextLabel(gameStruct->windows, line->words[1]);
+
+          if (tl == NULL) {
+            printf("Button AND TextLabel NOT Found\n");
+            continue;
+          }
+
+          // Change RGB color of the background
+          if (line->wordsLength >= 3) 
+            tl->backgroundColor[0] = atoi(line->words[2]);
+          if (line->wordsLength >= 4) 
+            tl->backgroundColor[1] = atoi(line->words[3]);
+          if (line->wordsLength >= 5) 
+            tl->backgroundColor[2] = atoi(line->words[4]);
+
+
         } else if (strcmp("startScript", line->words[0]) == 0) {
 
           FilePiece *toStartScript = searchObjectByName(
-              gameStruct->allCategories, line->words[1], "Script");
+            gameStruct->allCategories, line->words[1], "Script");
           executeCode(toStartScript, line, map);
 
           // Create an integer variable

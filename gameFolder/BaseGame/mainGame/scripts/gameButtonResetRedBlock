@@ -1,0 +1,29 @@
+.Script
+
+if(numPos == 1){
+  changeBackgroundColorOf(button11, 150, 150, 150);
+}
+if(numPos == 2){
+  changeBackgroundColorOf(button21, 100, 100, 100);
+}
+if(numPos == 3){
+  changeBackgroundColorOf(button31, 150, 150, 150);
+}
+if(numPos == 4){
+  changeBackgroundColorOf(button12, 100, 100, 100);
+}
+if(numPos == 5){
+  changeBackgroundColorOf(button22, 150, 150, 150);
+}
+if(numPos == 6){
+  changeBackgroundColorOf(button32, 100, 100, 100);
+}
+if(numPos == 7){
+  changeBackgroundColorOf(button13, 150, 150, 150);
+}
+if(numPos == 8){
+  changeBackgroundColorOf(button23, 100, 100, 100);
+}
+if(numPos == 9){
+  changeBackgroundColorOf(button33, 150, 150, 150);
+}

@@ -1,10 +1,22 @@
 .Script
 
+// Click on the number
 if(buttonNum == numGamePos){
   // Get numbers
   add number actuGameNum;
   add actuGameNum 1;
   add actuGameNum numberGetMoreNumbers;
 
+  startScript gameNewNumberScript;
+  stopScript;
+}
+
+// Click on the red block
+if (buttonNum == redBlockGamePos) {
+  //Reset Number
+  set actuGameNum 0;
+  add actuGameNum numberGetStartingNumbers;
+
   startScript gameNewNumberScript; 
+  stopScript;
 }

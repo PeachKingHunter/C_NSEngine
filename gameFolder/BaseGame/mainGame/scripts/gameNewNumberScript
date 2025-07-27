@@ -8,3 +8,16 @@ startScript gameButtonChangeNum numPos numGamePos val " ";
 // Change the button to click and write the number on it
 randInto(numGamePos, 1, 9);
 startScript gameButtonChangeNum numPos numGamePos val actuGameNum;
+
+// The Red Block
+startScript gameButtonResetRedBlock numPos redBlockGamePos;
+if (actuGameNum > 9) { 
+  randInto(redBlockGamePos, 1, 9);
+  if (redBlockGamePos == numGamePos) {
+    set redBlockGamePos = 4;
+    if (redBlockGamePos == numGamePos) {
+      set redBlockGamePos = 5;
+    }
+  }
+  startScript gameButtonChangeRedBlock numPos redBlockGamePos;
+}
