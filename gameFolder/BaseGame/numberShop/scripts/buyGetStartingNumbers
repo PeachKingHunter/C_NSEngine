@@ -1,0 +1,36 @@
+.StartLate
+// Display
+int toAdd = numberGetStartingNumbersQuant;
+mult toAdd 2;
+int newBoost = numberGetStartingNumbers;
+add newBoost toAdd;
+
+int actuBoost = numberGetStartingNumbers;
+changeTextOf(getStartingNumbersDesc, "+" + actuBoost + " -> +" + newBoost);
+changeTextOf(getStartingNumbersPrice, numberGetStartingNumbersPrice);
+
+
+.Script
+if(numberGetStartingNumbersPrice < number){
+  // Use money and increase price
+  minus number numberGetStartingNumbersPrice;
+  mult numberGetStartingNumbersPrice 2;
+
+  // increase the upgrade
+  int toAdd = numberGetStartingNumbersQuant;
+  mult toAdd 2;
+  add numberGetStartingNumbers toAdd;
+
+  add numberGetStartingNumbersQuant 1;
+
+  // Display
+  int toAdd = numberGetStartingNumbersQuant;
+  mult toAdd 2;
+  int newBoost = numberGetStartingNumbers;
+  add newBoost toAdd;
+
+  int actuBoost = numberGetStartingNumbers;
+  changeTextOf(getStartingNumbersDesc, "+" + actuBoost + " -> +" + newBoost);
+  changeTextOf(getStartingNumbersPrice, numberGetStartingNumbersPrice);
+
+}

@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 150 40
+pos: 230 210
+onClick: buyGetMoreNumbers
+text: "71"
+borderColor: 255 255 255
+backgroundColor: 44 44 44
+textColor 255 255 255 255

@@ -17,7 +17,8 @@ setSizeOf timeBackground timeNum same;
 // Reset on time passed
 if(timeNum > 340){
   //Reset Number
-  set actuGameNum 1;
+  set actuGameNum 0;
+  add actuGameNum numberGetStartingNumbers;
 
   startScript gameNewNumberScript; 
 }

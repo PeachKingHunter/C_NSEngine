@@ -6,3 +6,7 @@ loadOrCreate "numberGetMoreNumbersPrice" numberGetMoreNumbersPrice 100;
 loadOrCreate "numberGetWaitingTime" numberGetWaitingTime 10;
 loadOrCreate "numberGetWaitingTimeQuant" numberGetWaitingTimeQuant 1;
 loadOrCreate "numberGetWaitingTimePrice" numberGetWaitingTimePrice 125;
+
+loadOrCreate "numberGetStartingNumbers" numberGetStartingNumbers 1;
+loadOrCreate "numberGetStartingNumbersQuant" numberGetStartingNumbersQuant 1;
+loadOrCreate "numberGetStartingNumbersPrice" numberGetStartingNumbersPrice 71;

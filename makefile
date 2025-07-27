@@ -58,10 +58,10 @@ run: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabel
 	./target/main
 
 runVerif: main
-	valgrind --suppressions=SDL3_Errors.supp --leak-check=full --show-leak-kinds=all ./main
+	valgrind --suppressions=SDL3_Errors.supp --leak-check=full --show-leak-kinds=all ./target/main
 
 runGenSupp: main
-	valgrind --gen-suppressions=all --leak-check=full --show-leak-kinds=all ./main 2> valgrind_output.log
+	valgrind --gen-suppressions=all --leak-check=full --show-leak-kinds=all ./target/main 2> valgrind_output.log
 	sed -n '/^{/,/^}/p' valgrind_output.log > SDL3_Errors.supp
 	rm valgrind_output.log
 
