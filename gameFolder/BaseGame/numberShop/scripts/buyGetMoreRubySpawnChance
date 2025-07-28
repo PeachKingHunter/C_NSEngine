@@ -1,0 +1,26 @@
+.StartLate
+// Display
+int newBoost = numberGetRubySpawnChance;
+add newBoost 1;
+int actuBoost = numberGetRubySpawnChance;
+changeTextOf(getRubySpawnChanceDesc, actuBoost + "% -> " + newBoost + "%");
+changeTextOf(getRubySpawnChancePrice, numberGetRubySpawnChancePrice);
+
+
+.Script
+if(numberGetRubySpawnChancePrice < number){
+  // Use money and increase price
+  minus number numberGetRubySpawnChancePrice;
+  add numberGetRubySpawnChancePrice 10;
+
+  // increase the upgrade
+  add numberGetRubySpawnChance 1;
+  add numberGetRubySpawnChanceQuant 1;
+
+  // Display
+  int newBoost = numberGetRubySpawnChance;
+  add newBoost 1;
+  int actuBoost = numberGetRubySpawnChance;
+  changeTextOf(getRubySpawnChanceDesc, actuBoost + "% -> " + newBoost + "%");
+  changeTextOf(getRubySpawnChancePrice, numberGetRubySpawnChancePrice);
+}

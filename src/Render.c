@@ -93,7 +93,7 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
   SDL_Texture *textTexture =
       SDL_CreateTextureFromSurface(windowLC->renderer, textSurface);
 
-  posX = textLabels->posX + (textLabels->sizeX - textWidth) / 2 + 5;
+  posX = textLabels->posX + (textLabels->sizeX - textWidth) / 2;
   posY = textLabels->posY + (textLabels->sizeY - textHeight) / 2;
 
   posX = posX * windowWidth / windowLC->sizeX;

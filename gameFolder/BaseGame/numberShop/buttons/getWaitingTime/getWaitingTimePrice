@@ -1,7 +1,7 @@
 .Info
 objType: TextLabel
 size: 150 40
-pos: 230 110
+pos: 240 110
 onClick: buyGetMoreNumbers
 text: "125"
 borderColor: 255 255 255

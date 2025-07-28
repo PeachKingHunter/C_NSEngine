@@ -2,9 +2,12 @@
 // Create mains variables for the game
 loadOrCreate "NumberResource" number 0;
 intG numGamePos 5;
-intG redBlockGamePos 11;
 intG actuGameNum 1;
 intG lastResetFrame nbFrame;
+
+// Additional items on grid
+intG redBlockGamePos 11;
+intG rubyGamePos 11;
 
 // Write the default number on the grid
 startScript gameButtonChangeNum numPos numGamePos val actuGameNum;

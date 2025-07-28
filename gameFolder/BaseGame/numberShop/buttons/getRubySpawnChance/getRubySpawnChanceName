@@ -1,8 +1,8 @@
 .Info
 objType: TextLabel
 size: 210 40
-pos: 10 10
-text: "Get More Numbers"
+pos: 10 310
+text: "Ruby's Spawn Chance"
 borderColor: 255 255 255 0
 backgroundColor: 44 44 44 0
 textColor 255 255 255 255

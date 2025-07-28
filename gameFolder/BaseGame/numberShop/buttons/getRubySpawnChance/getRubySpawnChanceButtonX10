@@ -1,9 +1,9 @@
 .Info
 objType: Button
 size: 70 30
-pos: 240 160
-onClick: buyGetWaitingTime
-text: "Buy x1"
+pos: 320 360
+onClick: buyGetMoreRubySpawnChance
+text: "Buy x10"
 borderColor: 255 255 255
 backgroundColor: 111 111 111
 textColor 255 255 255 255

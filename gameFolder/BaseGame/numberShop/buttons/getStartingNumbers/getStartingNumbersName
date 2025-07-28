@@ -1,6 +1,6 @@
 .Info
 objType: TextLabel
-size: 200 40
+size: 210 40
 pos: 10 210
 text: "Up Starting Number"
 borderColor: 255 255 255 0

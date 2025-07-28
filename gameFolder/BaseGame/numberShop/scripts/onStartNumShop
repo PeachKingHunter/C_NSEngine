@@ -10,3 +10,7 @@ loadOrCreate "numberGetWaitingTimePrice" numberGetWaitingTimePrice 125;
 loadOrCreate "numberGetStartingNumbers" numberGetStartingNumbers 1;
 loadOrCreate "numberGetStartingNumbersQuant" numberGetStartingNumbersQuant 1;
 loadOrCreate "numberGetStartingNumbersPrice" numberGetStartingNumbersPrice 71;
+
+loadOrCreate "numberGetRubySpawnChance" numberGetRubySpawnChance 0;
+loadOrCreate "numberGetRubySpawnChanceQuant" numberGetRubySpawnChanceQuant 1;
+loadOrCreate "numberGetRubySpawnChancePrice" numberGetRubySpawnChancePrice 100;

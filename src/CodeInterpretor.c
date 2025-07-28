@@ -117,8 +117,8 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
               index += strlen(string);
               free(string);
             }
-            buffer[index] = ' ';
-            index++;
+            //buffer[index] = ' ';
+            //index++;
           }
           buffer[index] = '\0';
 

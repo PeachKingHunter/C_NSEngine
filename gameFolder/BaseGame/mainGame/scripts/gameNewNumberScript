@@ -2,8 +2,16 @@
 //Next number
 set lastResetFrame nbFrame;
 
-// Reset last button's text
-startScript gameButtonChangeNum numPos numGamePos val " ";
+// Reset all buttons's text
+changeTextOf(button11, " ");
+changeTextOf(button21, " ");
+changeTextOf(button31, " ");
+changeTextOf(button12, " ");
+changeTextOf(button22, " ");
+changeTextOf(button32, " ");
+changeTextOf(button13, " ");
+changeTextOf(button23, " ");
+changeTextOf(button33, " ");
 
 // Change the button to click and write the number on it
 randInto(numGamePos, 1, 9);
@@ -14,10 +22,28 @@ startScript gameButtonResetRedBlock numPos redBlockGamePos;
 if (actuGameNum > 9) { 
   randInto(redBlockGamePos, 1, 9);
   if (redBlockGamePos == numGamePos) {
-    set redBlockGamePos = 4;
-    if (redBlockGamePos == numGamePos) {
-      set redBlockGamePos = 5;
-    }
+    minus redBlockGamePos 1;
   }
   startScript gameButtonChangeRedBlock numPos redBlockGamePos;
+}
+
+// The RUBY
+int rdm = 0;
+randInto(rdm, 0, 99);
+if (rdm < numberGetRubySpawnChance) { 
+  randInto(rubyGamePos, 1, 9);
+  if (rubyGamePos == numGamePos) {
+    add rubyGamePos 1;
+  }
+  if (rubyGamePos == redBlockGamePos) {
+    add rubyGamePos 1;
+  }  
+  if (rubyGamePos == numGamePos) {
+    add rubyGamePos 1;
+  }
+  if (rubyGamePos == redBlockGamePos) {
+    add rubyGamePos 1;
+  }
+  // TODO CHANGE IMAGE NOT TEXT
+  startScript gameButtonChangeNum numPos rubyGamePos val soon;
 }
