@@ -25,6 +25,8 @@ void infoSizeOperand(Line *line, void *obj, int objType, int sizeX, int sizeY) {
   // If the object was already created
   if (objType == 1) {
     SDL_SetWindowSize(((WindowLC *)obj)->window, sizeX, sizeY);
+    ((WindowLC *)obj)->sizeX = sizeX;
+    ((WindowLC *)obj)->sizeY = sizeY;
 
   } else if (objType == 2) {
     ((ButtonLC *)obj)->tl->sizeX = sizeX;
@@ -242,6 +244,8 @@ int main(int argc, char **argv) {
 
             window->window =
                 SDL_CreateWindow("Test", sizeX, sizeY, SDL_WINDOW_RESIZABLE);
+            window->sizeX = sizeX;
+            window->sizeY = sizeY;
             if (window->window == NULL) {
               free(window);
               return -1;
@@ -309,7 +313,6 @@ int main(int argc, char **argv) {
     }
   }
 
-
   Category *tempCat = allCategories;
   if (tempCat != NULL) {
     if (strcmp(tempCat->name, "Info") == 0) {
@@ -350,7 +353,7 @@ int main(int argc, char **argv) {
   while (startScriptsFile != NULL) {
     executeCode(startScriptsFile, NULL, NULL);
     startScriptsFile = startScriptsFile->next;
-  }  
+  }
 
   // Init SDL3
   if (!SDL_Init(SDL_INIT_VIDEO)) {

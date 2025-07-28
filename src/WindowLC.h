@@ -17,6 +17,8 @@
 
 typedef struct windowLC {
   SDL_Window *window;
+  int sizeX;
+  int sizeY;
   SDL_Renderer *renderer;
   int isVisible;
   // char *name;
