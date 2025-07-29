@@ -75,7 +75,7 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
 
             BigNumber *val = getVar(map, line, j);
             if (val == NULL) {
-              printf("%s ", line->words[j]);
+              printf("%s", line->words[j]);
 
             } else {
               printNum(val);
@@ -91,7 +91,7 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
           // Get The button and textLabel
           ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
           TextLabelLC *tl =
-            searchTextLabel(gameStruct->windows, line->words[1]);
+              searchTextLabel(gameStruct->windows, line->words[1]);
           if (button == NULL && tl == NULL) {
             printf("Button AND TextLabel NOT Found\n");
             continue;
@@ -117,8 +117,8 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
               index += strlen(string);
               free(string);
             }
-            //buffer[index] = ' ';
-            //index++;
+            // buffer[index] = ' ';
+            // index++;
           }
           buffer[index] = '\0';
 
@@ -131,14 +131,61 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
             free(tl->text);
             tl->text = strdup(buffer);
           }
+        } else if (strcmp("changeImageOf", line->words[0]) == 0) {
+          // Get The button and textLabel
+          ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
+          TextLabelLC *tl =
+              searchTextLabel(gameStruct->windows, line->words[1]);
+          if (button == NULL && tl == NULL) {
+            printf("Button AND TextLabel NOT Found\n");
+            continue;
+          }
+
+          // Get the image path to write
+          char buffer[500];
+          int index = 0;
+          buffer[index] = '\0';
+          for (int i = 2; i < line->wordsLength; i++) {
+            // the buffer have a limited size
+            if (strlen(line->words[i]) - 1 + index > 500)
+              break;
+
+            strcpy(buffer + index, "images/");
+            index += strlen("images/");
+            // Copy each string
+            BigNumber *val = getVar(map, line, i);
+            if (val == NULL) {
+              strcpy(buffer + index, line->words[i]);
+              index += strlen(line->words[i]);
+            } else {
+              char *string = getStrOfNum(val);
+              strcpy(buffer + index, string);
+              index += strlen(string);
+              free(string);
+            }
+            // buffer[index] = ' ';
+            // index++;
+          }
+          buffer[index] = '\0';
+
+          // Change the text
+          if (button != NULL) {
+            free(button->tl->imagePath);
+            button->tl->imagePath = strdup(buffer);
+
+          } else if (tl != NULL) {
+            free(tl->imagePath);
+            tl->imagePath = strdup(buffer);
+          }
+
         } else if (strcmp("changeBackgroundColorOf", line->words[0]) == 0) {
           // Get The button or textLabel
           ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
           TextLabelLC *tl = NULL;
-          if(button != NULL)
+          if (button != NULL)
             tl = button->tl;
 
-          if(tl == NULL)
+          if (tl == NULL)
             tl = searchTextLabel(gameStruct->windows, line->words[1]);
 
           if (tl == NULL) {
@@ -147,18 +194,17 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
           }
 
           // Change RGB color of the background
-          if (line->wordsLength >= 3) 
+          if (line->wordsLength >= 3)
             tl->backgroundColor[0] = atoi(line->words[2]);
-          if (line->wordsLength >= 4) 
+          if (line->wordsLength >= 4)
             tl->backgroundColor[1] = atoi(line->words[3]);
-          if (line->wordsLength >= 5) 
+          if (line->wordsLength >= 5)
             tl->backgroundColor[2] = atoi(line->words[4]);
-
 
         } else if (strcmp("startScript", line->words[0]) == 0) {
 
           FilePiece *toStartScript = searchObjectByName(
-            gameStruct->allCategories, line->words[1], "Script");
+              gameStruct->allCategories, line->words[1], "Script");
           executeCode(toStartScript, line, map);
 
           // Create an integer variable

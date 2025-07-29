@@ -13,6 +13,17 @@ changeTextOf(button13, " ");
 changeTextOf(button23, " ");
 changeTextOf(button33, " ");
 
+// Reset all buttons's image
+changeImageOf(button11, " ");
+changeImageOf(button21, " ");
+changeImageOf(button31, " ");
+changeImageOf(button12, " ");
+changeImageOf(button22, " ");
+changeImageOf(button32, " ");
+changeImageOf(button13, " ");
+changeImageOf(button23, " ");
+changeImageOf(button33, " ");
+
 // Change the button to click and write the number on it
 randInto(numGamePos, 1, 9);
 startScript gameButtonChangeNum numPos numGamePos val actuGameNum;
@@ -44,6 +55,5 @@ if (rdm < numberGetRubySpawnChance) {
   if (rubyGamePos == redBlockGamePos) {
     add rubyGamePos 1;
   }
-  // TODO CHANGE IMAGE NOT TEXT
-  startScript gameButtonChangeNum numPos rubyGamePos val soon;
+  startScript gameButtonChangeImage numPos rubyGamePos val "ruby.png";
 }

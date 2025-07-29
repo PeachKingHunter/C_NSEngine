@@ -1,0 +1,30 @@
+.Script
+
+if(numPos == 1)
+{
+  changeImageOf(button11, val);
+}
+if(numPos == 2){
+  changeImageOf(button21, val);
+}
+if(numPos == 3){
+  changeImageOf(button31, val);
+}
+if(numPos == 4){
+  changeImageOf(button12, val);
+}
+if(numPos == 5){
+  changeImageOf(button22, val);
+}
+if(numPos == 6){
+  changeImageOf(button32, val);
+}
+if(numPos == 7){
+  changeImageOf(button13, val);
+}
+if(numPos == 8){
+  changeImageOf(button23, val);
+}
+if(numPos == 9){
+  changeImageOf(button33, val);
+}

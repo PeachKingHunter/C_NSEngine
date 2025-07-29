@@ -48,7 +48,7 @@ $(obj)GamePackages.o: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.
 	$(cc) -r -o $@ $^
 
 main: main.c $(obj)Parser.o  $(obj)Hachage.o $(obj)BigNumberManager.o $(obj)GamePackages.o
-	$(cc) -Wall -o target/$@ $^ -lSDL3 -lSDL3_ttf $(lib) $(include)
+	$(cc) -Wall -o target/$@ $^ -lSDL3 -lSDL3_ttf -lSDL3_image $(lib) $(include)
 
 
 # For execute juste open the main or main.exe

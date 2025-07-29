@@ -20,3 +20,16 @@ if (buttonNum == redBlockGamePos) {
   startScript gameNewNumberScript; 
   stopScript;
 }
+
+// Click on a ruby
+if (buttonNum == rubyGamePos) {
+  // Remove ruby of the game's grid
+  startScript gameButtonChangeImage numPos rubyGamePos val " ";
+  set rubyGamePos 11;
+
+  // Increase Ruby
+  add ruby 1;
+  printf "Your count of ruby: " + ruby;
+
+  stopScript;
+}

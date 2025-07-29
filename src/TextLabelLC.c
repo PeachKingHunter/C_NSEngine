@@ -8,6 +8,9 @@ void freeTextLabels(TextLabelLC *tlLC) {
     if (tlLC->text != NULL)
       free(tlLC->text);
 
+    if (tlLC->imagePath != NULL)
+      free(tlLC->imagePath);
+
     free(tlLC->borderColor);
     free(tlLC->backgroundColor);
     free(tlLC->textColor);
@@ -54,6 +57,10 @@ TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text,
   }
 
   textLabel->textSize = ((float)textSize) / 10.;
+
+  textLabel->imagePath = (char *)malloc(sizeof(char) * 1);
+  textLabel->imagePath[0] = '\0';
+
 
   if (*text == NULL) {
     textLabel->text = (char *)malloc(sizeof(char) * 1);

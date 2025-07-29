@@ -21,6 +21,7 @@ typedef struct textLabelLC {
   int *backgroundColor;
   int *textColor;
   float textSize;
+  char *imagePath;
   // int *textBorderColor;
   // int textBorderSize;
   struct textLabelLC *next;

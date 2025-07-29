@@ -3,6 +3,8 @@
 #include "SDL3/SDL_render.h"
 #include "SDL3/SDL_video.h"
 #include "SDL3_ttf/SDL_ttf.h"
+#include "SDL3_ttf/SDL_ttf.h"
+//#include "SDL3_image/SDL_image.h"
 
 #include "Parser/Parser.h"
 #include "src/CodeInterpretor.h"
