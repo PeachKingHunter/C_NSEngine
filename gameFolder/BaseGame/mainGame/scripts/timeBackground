@@ -12,6 +12,9 @@ div timeNum 3;
 mult timeNum 10;
 div timeNum numberGetWaitingTime;
 
+mult timeNum 100;
+div timeNum rubyGetWaitingTime;
+
 setSizeOf timeBackground timeNum same;
 
 // Reset on time passed

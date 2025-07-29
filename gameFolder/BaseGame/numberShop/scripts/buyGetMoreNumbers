@@ -10,23 +10,25 @@ changeTextOf(getMoreNumbersPrice, numberGetMoreNumbersPrice);
 
 
 .Script
-if(numberGetMoreNumbersPrice < number){
-  // Use money and increase price
-  minus number numberGetMoreNumbersPrice;
-  mult numberGetMoreNumbersPrice 2;
-
-  // increase the upgrade
-  //add numberGetMoreNumbers 1;
-  add numberGetMoreNumbers numberGetMoreNumbersQuant;
-  add numberGetMoreNumbersQuant 1;
-
-  // Display
-  int newBoost = numberGetMoreNumbers;
-  add newBoost numberGetMoreNumbersQuant
-    add newBoost 1;
-  int actuBoost = numberGetMoreNumbers;
-  add actuBoost 1;
-  changeTextOf(getMoreNumbersDesc, "+" + actuBoost + " -> +" + newBoost);
-  changeTextOf(getMoreNumbersPrice, numberGetMoreNumbersPrice);
-
+if(numberGetMoreNumbersPrice > number){
+  stopScript;
 }
+
+// Use money and increase price
+minus number numberGetMoreNumbersPrice;
+mult numberGetMoreNumbersPrice 2;
+
+// increase the upgrade
+//add numberGetMoreNumbers 1;
+add numberGetMoreNumbers numberGetMoreNumbersQuant;
+add numberGetMoreNumbersQuant 1;
+
+// Display
+int newBoost = numberGetMoreNumbers;
+add newBoost numberGetMoreNumbersQuant
+add newBoost 1;
+int actuBoost = numberGetMoreNumbers;
+add actuBoost 1;
+changeTextOf(getMoreNumbersDesc, "+" + actuBoost + " -> +" + newBoost);
+changeTextOf(getMoreNumbersPrice, numberGetMoreNumbersPrice);
+

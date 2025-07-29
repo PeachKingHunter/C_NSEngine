@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 170 40
+pos: 220 500
+text: "Ruby's Shop"
+borderColor: 255 255 255 0
+backgroundColor: 44 44 44 0
+textColor 255 255 255
+textSize 9

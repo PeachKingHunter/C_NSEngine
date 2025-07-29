@@ -9,22 +9,24 @@ changeTextOf(getWaitingTimePrice, numberGetWaitingTimePrice);
 
 
 .Script
-if(numberGetWaitingTimePrice < number){
-  // Use money and increase price
-  minus number numberGetWaitingTimePrice;
-  mult numberGetWaitingTimePrice 2;
-
-  // increase the upgrade
-  mult numberGetWaitingTime 15;
-  div numberGetWaitingTime 10;
-  add numberGetWaitingTimeQuant 1;
-
-  // Display
-  int newBoost = numberGetWaitingTime;
-  mult newBoost 15;
-  div newBoost 10;
-  int actuBoost = numberGetWaitingTime;
-  changeTextOf(getWaitingTimeDesc, "x" + actuBoost + " -> x" + newBoost);
-  changeTextOf(getWaitingTimePrice, numberGetWaitingTimePrice);
-
+if(numberGetWaitingTimePrice > number){
+  stopScript;
 }
+
+// Use money and increase price
+minus number numberGetWaitingTimePrice;
+mult numberGetWaitingTimePrice 2;
+
+// increase the upgrade
+mult numberGetWaitingTime 15;
+div numberGetWaitingTime 10;
+add numberGetWaitingTimeQuant 1;
+
+// Display
+int newBoost = numberGetWaitingTime;
+mult newBoost 15;
+div newBoost 10;
+int actuBoost = numberGetWaitingTime;
+changeTextOf(getWaitingTimeDesc, "x" + actuBoost + " -> x" + newBoost);
+changeTextOf(getWaitingTimePrice, numberGetWaitingTimePrice);
+

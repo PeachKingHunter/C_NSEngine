@@ -25,7 +25,15 @@ void clickLeftMouse(WindowLC *windowLC, float posX, float posY,
         posX < getButtonPosX(button) + getButtonSizeX(button) &&
         posY < getButtonPosY(button) + getButtonSizeY(button)) {
       // printf("Button clicked\n");
-      executeCode(button->onClickScript, button->callLine, NULL);
+      Line *line = button->callLine;
+      if (line->wordsLength == 3) {
+        for (int i = 0; i < atoi(line->words[2]); i++) {
+          executeCode(button->onClickScript, button->callLine, NULL);
+        }
+
+      } else {
+        executeCode(button->onClickScript, button->callLine, NULL);
+      }
     }
     button = button->next;
   }

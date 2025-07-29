@@ -1,0 +1,31 @@
+.StartLate
+// Display
+int newBoost = rubyGetWaitingTime;
+mult newBoost 11;
+div newBoost 10;
+int actuBoost = rubyGetWaitingTime;
+changeTextOf(getWaitingTimeDescRuby, actuBoost + "% -> " + newBoost + "%");
+changeTextOf(getWaitingTimePriceRuby, rubyGetWaitingTimePrice);
+
+
+.Script
+if(rubyGetWaitingTimePrice > ruby){
+  stopScript;
+}
+
+// Use money and increase price
+minus ruby rubyGetWaitingTimePrice;
+mult rubyGetWaitingTimePrice 2;
+
+// increase the upgrade
+mult rubyGetWaitingTime 11;
+div rubyGetWaitingTime 10;
+add rubyGetWaitingTimeQuant 1;
+
+// Display
+int newBoost = rubyGetWaitingTime;
+mult newBoost 11;
+div newBoost 10;
+int actuBoost = rubyGetWaitingTime;
+changeTextOf(getWaitingTimeDescRuby, actuBoost + "% -> " + newBoost + "%");
+changeTextOf(getWaitingTimePriceRuby, rubyGetWaitingTimePrice);

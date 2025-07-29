@@ -1,8 +1,9 @@
 .Info
 objType: TextLabel
-size: 150 40
-pos: 240 10
-text: "100"
+size: 200 40
+pos: 10 500
+text: "Ruby: 0"
 borderColor: 255 255 255
 backgroundColor: 44 44 44
-textColor 255 255 255 255
+textColor 255 255 255
+textSize 8

@@ -1,0 +1,4 @@
+.Start
+loadOrCreate "rubyGetWaitingTime" rubyGetWaitingTime 100;
+loadOrCreate "rubyGetWaitingTimeQuant" rubyGetWaitingTimeQuant 1;
+loadOrCreate "rubyGetWaitingTimePrice" rubyGetWaitingTimePrice 1;
