@@ -24,13 +24,14 @@ typedef struct textLabelLC {
   char *imagePath;
   // int *textBorderColor;
   // int textBorderSize;
+  bool isVisible;
   struct textLabelLC *next;
 } TextLabelLC;
 
 void freeTextLabels(TextLabelLC *textLabels);
 TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text,
                              int *borderColor, int *backgroundColor,
-                             int *textColor, int textSize);
+                             int *textColor, int textSize, bool isVisible);
 
 // Getters
 int getTextLabelSizeX(TextLabelLC *tl);

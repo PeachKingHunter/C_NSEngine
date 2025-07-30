@@ -1,0 +1,3 @@
+.Script
+changeTextOf(highestNumber, "HighestNumber: " + highestNumber);
+printf "HighestNumber: " + highestNumber;

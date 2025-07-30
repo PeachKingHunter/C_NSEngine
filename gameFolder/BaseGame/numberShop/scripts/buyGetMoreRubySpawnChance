@@ -6,9 +6,33 @@ int actuBoost = numberGetRubySpawnChance;
 changeTextOf(getRubySpawnChanceDesc, actuBoost + "% -> " + newBoost + "%");
 changeTextOf(getRubySpawnChancePrice, numberGetRubySpawnChancePrice);
 
+if numberGetRubySpawnChance > 0 {
+  showOf rubyShopWindow;
+  printf "rubyShopWindow -> should be visible now"
+}
+
+if numberGetRubySpawnChance > 99 {
+  hideOf getRubySpawnChanceButtonX1;
+  hideOf getRubySpawnChanceButtonX10;
+  hideOf getRubySpawnChanceDesc;
+  hideOf getRubySpawnChanceName;
+  hideOf getRubySpawnChancePrice;
+  printf "ruby's chance upgrade in number's shop -> should be invisible now"
+}
 
 .Script
 if(numberGetRubySpawnChancePrice > number){
+  stopScript;
+}
+
+// Hide it if fully purchased
+if numberGetRubySpawnChance > 99 {
+  hideOf getRubySpawnChanceButtonX1;
+  hideOf getRubySpawnChanceButtonX10;
+  hideOf getRubySpawnChanceDesc;
+  hideOf getRubySpawnChanceName;
+  hideOf getRubySpawnChancePrice;
+  printf "ruby's chance upgrade in number's shop -> should be invisible now"
   stopScript;
 }
 

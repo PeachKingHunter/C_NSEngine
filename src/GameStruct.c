@@ -111,13 +111,13 @@ void *searchInstanceByName(WindowLC *windowLC, char *name, int *type) {
     return res;
   }
 
-  /*while(windowLC != NULL){
-    if(strcmp(windowLC->name, name) == 0){    TODO: ADD name to windowLC
+  while(windowLC != NULL){
+    if(strcmp(windowLC->name, name) == 0){      
       *type = 1;
       return windowLC;
     }
     windowLC = windowLC->next;
-  }*/
+  }
 
   return NULL;
 }

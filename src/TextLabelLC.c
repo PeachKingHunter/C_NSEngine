@@ -23,7 +23,7 @@ void freeTextLabels(TextLabelLC *tlLC) {
 
 TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text,
                              int *borderColor, int *backgroundColor,
-                             int *textColor, int textSize) {
+                             int *textColor, int textSize, bool isVisible) {
   TextLabelLC *textLabel = (TextLabelLC *)malloc(sizeof(TextLabelLC));
   if (textLabel == NULL) {
     return NULL;
@@ -70,6 +70,7 @@ TextLabelLC *createTextLabel(int sizeX, int sizeY, char *name, char **text,
     textLabel->text = *text;
     *text = NULL;
   }
+  textLabel->isVisible = isVisible;
   textLabel->next = NULL;
   return textLabel;
 }

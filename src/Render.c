@@ -44,6 +44,9 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
   if (textLabels == NULL || windowLC == NULL)
     return;
 
+  if (textLabels->isVisible == false)
+    return;
+
   int windowWidth = -1;
   int windowHeight = -1;
   if (SDL_GetWindowSize(windowLC->window, &windowWidth, &windowHeight) == 0) {

@@ -7,6 +7,7 @@ void freeWindowLC(WindowLC *windowLC) {
 
     freeButtons(windowLC->buttons);
     freeTextLabels(windowLC->textLabels);
+    free(windowLC->name);
 
     WindowLC *temp = windowLC;
     windowLC = windowLC->next;

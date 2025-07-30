@@ -1,7 +1,7 @@
 .Info
 objType: Button
 size 100 100
-pos 10 230
+pos 10 260
 onClick gameButtonScript buttonNum 7
 borderColor 255 255 255
 backgroundColor 150 150 150

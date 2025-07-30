@@ -20,10 +20,10 @@ typedef struct windowLC {
   int sizeX;
   int sizeY;
   SDL_Renderer *renderer;
-  int isVisible;
-  // char *name;
+  char *name;
   ButtonLC *buttons;
   TextLabelLC *textLabels;
+  int isVisible;
   struct windowLC *next;
 } WindowLC;
 

@@ -3,13 +3,13 @@
 #include "SDL3/SDL_render.h"
 #include "SDL3/SDL_video.h"
 #include "SDL3_ttf/SDL_ttf.h"
-#include "SDL3_ttf/SDL_ttf.h"
-//#include "SDL3_image/SDL_image.h"
+// #include "SDL3_image/SDL_image.h"
 
 #include "Parser/Parser.h"
 #include "src/CodeInterpretor.h"
 #include "src/GameStruct.h"
 #include "src/Render.h"
+#include "src/WindowLC.h"
 
 #include <stdbool.h>
 #include <time.h>
@@ -121,6 +121,7 @@ int main(int argc, char **argv) {
       int backgroundColor[4] = {255, 0, 0, 255};
       int textColor[4] = {255, 0, 0, 255};
       int textSize = 10;
+      bool isVisible = true;
 
       while (abc < fp->nbLine) {
         line = fp->data[abc];
@@ -157,6 +158,34 @@ int main(int argc, char **argv) {
           } else if (objType == 3) {
             ((TextLabelLC *)obj)->posX = posX;
             ((TextLabelLC *)obj)->posY = posY;
+          }
+
+        } else if (strcmp(line->words[0], "show") == 0) {
+          // Change positionVariables
+          isVisible = true;
+
+          // If the object was already created
+          if (objType == 1) {
+            ((WindowLC *)obj)->isVisible = isVisible;
+            //SDL_ShowWindow(obj);
+          } else if (objType == 2) {
+            ((ButtonLC *)obj)->tl->isVisible = isVisible;
+          } else if (objType == 3) {
+            ((TextLabelLC *)obj)->isVisible = isVisible;
+          }
+
+        } else if (strcmp(line->words[0], "hide") == 0) {
+          // Change positionVariables
+          isVisible = false;
+
+          // If the object was already created
+          if (objType == 1) {
+            ((WindowLC *)obj)->isVisible = isVisible;
+            //SDL_HideWindow(obj);
+          } else if (objType == 2) {
+            ((ButtonLC *)obj)->tl->isVisible = isVisible;
+          } else if (objType == 3) {
+            ((TextLabelLC *)obj)->isVisible = isVisible;
           }
 
         } else if (strcmp(line->words[0], "borderColor") == 0) {
@@ -242,8 +271,7 @@ int main(int argc, char **argv) {
             // window->next = tmp;
             window->buttons = NULL;
             window->textLabels = NULL;
-            window->isVisible = 1;
-
+            window->name = strdup(fp->fileName);
             window->window =
                 SDL_CreateWindow("Test", sizeX, sizeY, SDL_WINDOW_RESIZABLE);
             window->sizeX = sizeX;
@@ -251,6 +279,11 @@ int main(int argc, char **argv) {
             if (window->window == NULL) {
               free(window);
               return -1;
+            }
+
+            window->isVisible = isVisible;
+            if (isVisible == false) {
+              SDL_HideWindow(window->window);
             }
 
             // Create Renderer
@@ -269,7 +302,7 @@ int main(int argc, char **argv) {
             // Create Button
             ButtonLC *button = createButton(
                 sizeX, sizeY, fp->fileName, &text, &onClickScript, &callLine,
-                borderColor, backgroundColor, textColor, textSize);
+                borderColor, backgroundColor, textColor, textSize, isVisible);
             if (button == NULL) {
               printf("Error Creating a Button");
               freeWindowLC(window);
@@ -286,7 +319,7 @@ int main(int argc, char **argv) {
             // Create textLabel
             TextLabelLC *textLabel =
                 createTextLabel(sizeX, sizeY, fp->fileName, &text, borderColor,
-                                backgroundColor, textColor, textSize);
+                                backgroundColor, textColor, textSize, isVisible);
             if (textLabel == NULL) {
               printf("Error Creating a Button");
               freeWindowLC(window);

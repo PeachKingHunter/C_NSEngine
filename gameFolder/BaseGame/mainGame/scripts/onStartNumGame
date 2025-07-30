@@ -8,13 +8,19 @@ intG lastResetFrame nbFrame;
 intG redBlockGamePos 11;
 intG rubyGamePos 11;
 
-// Write the default number on the grid
-startScript gameButtonChangeNum numPos numGamePos val actuGameNum;
-
 // Ressources
 loadOrCreate "NumberResource" number 0;
+loadOrCreate "HighestNumber" highestNumber 1;
 loadOrCreate "RubyResource" ruby 0;
 
 // Script executed
 printf("Start executed");
 
+
+
+.StartLate
+// Display the highest number reached
+startScript actuHighestNumber;
+
+// Write the default number on the grid
+startScript gameButtonChangeNum numPos numGamePos val actuGameNum;

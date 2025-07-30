@@ -22,7 +22,7 @@ void freeButtons(ButtonLC *buttons);
 ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text,
                        FilePiece **onClickScript, Line **callLine,
                        int *colorButton, int *backgroundButton, int *textColor,
-                       int textSize);
+                       int textSize, bool isVisible);
 
 // Getters
 int getButtonSizeX(ButtonLC *button);

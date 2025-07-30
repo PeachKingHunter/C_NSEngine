@@ -16,10 +16,10 @@ void freeButtons(ButtonLC *buttons) {
 ButtonLC *createButton(int sizeX, int sizeY, char *name, char **text,
                        FilePiece **onClickScript, Line **callLine,
                        int *borderColor, int *backgroundColor, int *textColor,
-                       int textSize) {
+                       int textSize, bool isVisible) {
   ButtonLC *button = (ButtonLC *)malloc(sizeof(ButtonLC));
   button->tl = createTextLabel(sizeX, sizeY, name, text, borderColor,
-                               backgroundColor, textColor, textSize);
+                               backgroundColor, textColor, textSize, isVisible);
   button->onClickScript = *onClickScript;
   *onClickScript = NULL;
   button->callLine = *callLine;

@@ -1,4 +1,9 @@
 #include "CodeInterpretor.h"
+#include "ButtonLC.h"
+#include "TextLabelLC.h"
+#include "WindowLC.h"
+#include <SDL3/SDL_video.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 void clickLeftMouse(WindowLC *windowLC, float posX, float posY,
@@ -21,18 +26,20 @@ void clickLeftMouse(WindowLC *windowLC, float posX, float posY,
   // Detect click in button
   ButtonLC *button = windowLC->buttons;
   while (button != NULL) {
-    if (posX > getButtonPosX(button) && posY > getButtonPosY(button) &&
-        posX < getButtonPosX(button) + getButtonSizeX(button) &&
-        posY < getButtonPosY(button) + getButtonSizeY(button)) {
-      // printf("Button clicked\n");
-      Line *line = button->callLine;
-      if (line->wordsLength == 3) {
-        for (int i = 0; i < atoi(line->words[2]); i++) {
+    if (button->tl->isVisible == true) {
+      if (posX > getButtonPosX(button) && posY > getButtonPosY(button) &&
+          posX < getButtonPosX(button) + getButtonSizeX(button) &&
+          posY < getButtonPosY(button) + getButtonSizeY(button)) {
+        // printf("Button clicked\n");
+        Line *line = button->callLine;
+        if (line->wordsLength == 3) {
+          for (int i = 0; i < atoi(line->words[2]); i++) {
+            executeCode(button->onClickScript, button->callLine, NULL);
+          }
+
+        } else {
           executeCode(button->onClickScript, button->callLine, NULL);
         }
-
-      } else {
-        executeCode(button->onClickScript, button->callLine, NULL);
       }
     }
     button = button->next;
@@ -333,7 +340,51 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
             // TODO Like above
           }
 
-          // Arithmetic operator
+        } else if (strcmp("hideOf", line->words[0]) == 0 &&
+                   line->wordsLength >= 2) {
+          int type = 0;
+          void *instance =
+              searchInstanceByName(gameStruct->windows, line->words[1], &type);
+          if (instance == NULL || type == -1)
+            continue;
+
+          if (type == 1) {
+            WindowLC *obj = instance;
+            SDL_HideWindow(obj->window);
+            obj->isVisible = false;
+
+          } else if (type == 2) {
+            ButtonLC *obj = instance;
+            obj->tl->isVisible = false;
+
+          } else if (type == 3) {
+            TextLabelLC *obj = instance;
+            obj->isVisible = false;
+          }
+
+        } else if (strcmp("showOf", line->words[0]) == 0 &&
+                   line->wordsLength >= 2) {
+          int type = 0;
+          void *instance =
+              searchInstanceByName(gameStruct->windows, line->words[1], &type);
+          if (instance == NULL || type == -1)
+            continue;
+
+          if (type == 1) {
+            WindowLC *obj = instance;
+            SDL_ShowWindow(obj->window);
+            obj->isVisible = true;
+
+          } else if (type == 2) {
+            ButtonLC *obj = instance;
+            obj->tl->isVisible = true;
+
+          } else if (type == 3) {
+            TextLabelLC *obj = instance;
+            obj->isVisible = true;
+          }
+
+          // Arithmetic operators
         } else if ((strcmp("add", line->words[0]) == 0 ||
                     strcmp("set", line->words[0]) == 0 ||
                     strcmp("minus", line->words[0]) == 0 ||

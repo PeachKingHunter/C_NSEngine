@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 320 20
+pos: 10 10
+text: "HighestNumber: 1"
+borderColor: 255 255 255
+backgroundColor: 44 44 44
+textColor 255 255 255
+textSize 6
