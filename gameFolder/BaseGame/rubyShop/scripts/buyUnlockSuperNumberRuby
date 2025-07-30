@@ -1,0 +1,30 @@
+.StartLate
+// Display
+if (rubySuperNumberUnlocked == 1) {
+  hideOf getSuperNumberBuyX1Ruby;
+  hideOf getSuperNumberDesc1Ruby;
+  hideOf getSuperNumberDesc2Ruby;
+  hideOf getSuperNumberNameRuby;
+  hideOf getSuperNumberPriceRuby;
+}
+
+
+.Script
+if(71 > ruby){
+  stopScript;
+}
+
+// Use money and increase price
+minus ruby 71;
+
+// increase the upgrade
+set rubySuperNumberUnlocked 1;
+
+// Display
+if (rubySuperNumberUnlocked == 1) {
+  hideOf getSuperNumberBuyX1Ruby;
+  hideOf getSuperNumberDesc1Ruby;
+  hideOf getSuperNumberDesc2Ruby;
+  hideOf getSuperNumberNameRuby;
+  hideOf getSuperNumberPriceRuby;
+}

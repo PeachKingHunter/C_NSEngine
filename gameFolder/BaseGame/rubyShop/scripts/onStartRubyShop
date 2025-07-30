@@ -2,3 +2,5 @@
 loadOrCreate "rubyGetWaitingTime" rubyGetWaitingTime 100;
 loadOrCreate "rubyGetWaitingTimeQuant" rubyGetWaitingTimeQuant 1;
 loadOrCreate "rubyGetWaitingTimePrice" rubyGetWaitingTimePrice 1;
+
+loadOrCreate "rubySuperNumberUnlocked" rubySuperNumberUnlocked 0;

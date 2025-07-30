@@ -1,8 +1,8 @@
 .Info
 objType: TextLabel
-size: 210 40
-pos: 10 10
-text: "Get More Time"
+size: 210 20
+pos: 10 120
+text: "Super Number"
 borderColor: 255 255 255 0
 backgroundColor: 44 44 44 0
 textColor 255 255 255 255

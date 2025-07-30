@@ -1,9 +1,9 @@
 .Info
 objType: TextLabel
-size: 210 40
-pos: 10 10
-text: "Get More Time"
+size: 210 30
+pos: 10 165
+text: "x10 numbers (In yellow)"
 borderColor: 255 255 255 0
 backgroundColor: 44 44 44 0
 textColor 255 255 255 255
-textSize 8
+textSize 6

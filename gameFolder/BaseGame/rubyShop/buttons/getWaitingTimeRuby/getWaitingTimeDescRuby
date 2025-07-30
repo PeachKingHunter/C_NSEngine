@@ -1,7 +1,7 @@
 .Info
 objType: TextLabel
 size: 210 30
-pos: 10 160
+pos: 10 60
 text: "x1 -> x1.1"
 borderColor: 255 255 255 0
 backgroundColor: 44 44 44 0
