@@ -25,6 +25,12 @@ if(numberGetRubySpawnChancePrice > number){
   stopScript;
 }
 
+// Display ruby's shop
+if numberGetRubySpawnChance == 0 {
+  showOf rubyShopWindow;
+  printf "rubyShopWindow -> should be visible now"
+}
+
 // Hide it if fully purchased
 if numberGetRubySpawnChance > 99 {
   hideOf getRubySpawnChanceButtonX1;
