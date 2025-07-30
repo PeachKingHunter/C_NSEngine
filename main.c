@@ -181,7 +181,7 @@ int main(int argc, char **argv) {
           // If the object was already created
           if (objType == 1) {
             ((WindowLC *)obj)->isVisible = isVisible;
-            //SDL_HideWindow(obj);
+            SDL_HideWindow(((WindowLC *)obj)->window);
           } else if (objType == 2) {
             ((ButtonLC *)obj)->tl->isVisible = isVisible;
           } else if (objType == 3) {
@@ -281,11 +281,6 @@ int main(int argc, char **argv) {
               return -1;
             }
 
-            window->isVisible = isVisible;
-            if (isVisible == false) {
-              SDL_HideWindow(window->window);
-            }
-
             // Create Renderer
             SDL_Renderer *renderer = SDL_CreateRenderer(window->window, NULL);
             if (renderer == NULL) {
@@ -294,6 +289,11 @@ int main(int argc, char **argv) {
             }
             SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
             window->renderer = renderer;
+
+            window->isVisible = isVisible;
+            if (isVisible == false) {
+              SDL_HideWindow(window->window);
+            }
 
             objType = 1;
             obj = window;
