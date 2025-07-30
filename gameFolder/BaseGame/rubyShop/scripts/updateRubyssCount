@@ -1,2 +1,2 @@
 .Update
-changeTextOf(rubysCount, "rubys:" + ruby);
+changeTextOf(rubysCount, "Rubys:" + ruby);
