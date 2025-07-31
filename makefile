@@ -42,9 +42,11 @@ $(obj)CodeInterpretor.o: src/CodeInterpretor.c src/CodeInterpretor.h
 $(obj)Render.o: src/Render.c src/Render.h
 	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
+$(obj)ObjectsCreator.o: src/ObjectsCreator.c src/ObjectsCreator.h
+	$(cc) -Wall -c -o $@ $< $(lib) $(include)
 
 # Create and compile the main
-$(obj)GamePackages.o: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o
+$(obj)GamePackages.o: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o $(obj)ObjectsCreator.o
 	$(cc) -r -o $@ $^
 
 main: main.c $(obj)Parser.o  $(obj)Hachage.o $(obj)BigNumberManager.o $(obj)GamePackages.o
@@ -54,7 +56,7 @@ main: main.c $(obj)Parser.o  $(obj)Hachage.o $(obj)BigNumberManager.o $(obj)Game
 # For execute juste open the main or main.exe
 
 # Compile Running && Tests commands (configured for linux because I use linux)
-run: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o main
+run: $(obj)GameStruct.o $(obj)CodeInterpretor.o $(obj)WindowLC.o $(obj)TextLabelLC.o $(obj)ButtonLC.o $(obj)Render.o main $(obj)GamePackages.o $(obj)ObjectsCreator.o
 	./target/main
 
 runVerif: main

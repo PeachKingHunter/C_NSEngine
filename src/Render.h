@@ -17,5 +17,8 @@
 
 void render(WindowLC *windowLC);
 void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC);
+void renderBackgroundAndBorder(TextLabelLC *textLabels, WindowLC *windowLC, int windowWidth, int windowHeight);
+void renderText(TextLabelLC *textLabels, WindowLC *windowLC, int windowWidth, int windowHeight);
+void renderImage(TextLabelLC *textLabels, WindowLC *windowLC, int windowWidth, int windowHeight);
 
 #endif

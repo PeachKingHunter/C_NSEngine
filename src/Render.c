@@ -54,31 +54,37 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
     windowHeight = windowLC->sizeY;
   }
 
-  //----------------------------------------------------------------------------
+  renderBackgroundAndBorder(textLabels, windowLC, windowWidth, windowHeight);
+  renderText(textLabels, windowLC, windowWidth, windowHeight);
+  renderImage(textLabels, windowLC, windowWidth, windowHeight);
+}
 
-  // Fill the button's background
-  SDL_SetRenderDrawColor(windowLC->renderer, textLabels->backgroundColor[0],
-                         textLabels->backgroundColor[1],
-                         textLabels->backgroundColor[2],
-                         textLabels->backgroundColor[3]);
-
+void renderBackgroundAndBorder(TextLabelLC *textLabels, WindowLC *windowLC,
+                               int windowWidth, int windowHeight) {
+  // Calculs
   int posX = textLabels->posX * windowWidth / windowLC->sizeX;
   int posY = textLabels->posY * windowHeight / windowLC->sizeY;
   int sizeX = textLabels->sizeX * windowWidth / windowLC->sizeX;
   int sizeY = textLabels->sizeY * windowHeight / windowLC->sizeY;
   SDL_FRect rect = {posX, posY, sizeX, sizeY};
+
+  // Background
+  SDL_SetRenderDrawColor(windowLC->renderer, textLabels->backgroundColor[0],
+                         textLabels->backgroundColor[1],
+                         textLabels->backgroundColor[2],
+                         textLabels->backgroundColor[3]);
+
   SDL_RenderFillRect(windowLC->renderer, &rect);
 
-  //----------------------------------------------------------------------------
-
-  // Draw border of the button
+  // Border
   SDL_SetRenderDrawColor(windowLC->renderer, textLabels->borderColor[0],
                          textLabels->borderColor[1], textLabels->borderColor[2],
                          textLabels->borderColor[3]);
   SDL_RenderRect(windowLC->renderer, &rect);
+}
 
-  //----------------------------------------------------------------------------
-
+void renderText(TextLabelLC *textLabels, WindowLC *windowLC, int windowWidth,
+                int windowHeight) {
   // Create text on surface
   GameStruct *gameStruct = getGameStruct();
   TTF_Font *font = getGameStructFont();
@@ -96,8 +102,8 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
     SDL_Texture *textTexture =
         SDL_CreateTextureFromSurface(windowLC->renderer, textSurface);
 
-    posX = textLabels->posX + (textLabels->sizeX - textWidth) / 2;
-    posY = textLabels->posY + (textLabels->sizeY - textHeight) / 2;
+    int posX = textLabels->posX + (textLabels->sizeX - textWidth) / 2;
+    int posY = textLabels->posY + (textLabels->sizeY - textHeight) / 2;
 
     posX = posX * windowWidth / windowLC->sizeX;
     posY = posY * windowHeight / windowLC->sizeY;
@@ -111,9 +117,10 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
     SDL_DestroySurface(textSurface);
     SDL_DestroyTexture(textTexture);
   }
+}
 
-  //----------------------------------------------------------------------------
-
+void renderImage(TextLabelLC *textLabels, WindowLC *windowLC, int windowWidth,
+                 int windowHeight) {
   // Image Rendering
   SDL_Surface *imageSurface = IMG_Load(textLabels->imagePath);
   if (imageSurface != NULL) {
@@ -126,8 +133,8 @@ void renderTextLabel(TextLabelLC *textLabels, WindowLC *windowLC) {
     SDL_Texture *imageTexture =
         SDL_CreateTextureFromSurface(windowLC->renderer, imageSurface);
 
-    posX = textLabels->posX;
-    posY = textLabels->posY;
+    int posX = textLabels->posX;
+    int posY = textLabels->posY;
 
     posX = posX * windowWidth / windowLC->sizeX;
     posY = posY * windowHeight / windowLC->sizeY;
