@@ -4,6 +4,9 @@ intG numGamePos 5;
 intG actuGameNum 1;
 intG lastResetFrame nbFrame;
 
+// Random
+intG superNumber 99;
+
 // Additional items on grid
 intG redBlockGamePos 11;
 intG rubyGamePos 11;

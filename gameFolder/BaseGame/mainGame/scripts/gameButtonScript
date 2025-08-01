@@ -2,6 +2,11 @@
 
 // Click on the number
 if(buttonNum == numGamePos){
+  //Remove SuperNumber Effect
+  if superNumber == 00 {
+    div actuGameNum 10;
+  }
+
   // Get numbers
   add number actuGameNum;
   add actuGameNum 1;

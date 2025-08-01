@@ -6,6 +6,11 @@ int timeNum nbFrame;
 minus timeNum lastResetFrame;
 mult timeNum actuGameNum;
 
+// Super Number's effect
+if superNumber == 00 {
+  div timeNum 10;
+}
+
 mult timeNum 2
 div timeNum 3;
 

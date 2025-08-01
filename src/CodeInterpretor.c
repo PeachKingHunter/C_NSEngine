@@ -188,6 +188,7 @@ void executeCode(FilePiece *code, Line *callLine, HashMap *beforeLocalVar) {
         } else if (changeTextOf(line, map) == 1) {
         } else if (changeImageOf(line, map) == 1) {
         } else if (changeBackgroundColorOf(line, map) == 1) {
+        } else if (changeTextColorOf(line, map) == 1) {
         } else if (startScript(line, map) == 1) {
         } else if (intOperand(line, map) == 1) {
         } else if (intG(line, map) == 1) {
@@ -243,7 +244,7 @@ int printfOperand(Line *line, HashMap *map) {
   if (line == NULL || map == NULL)
     return 0;
 
-  if (strcmp("printf", line->words[0]) != 0 || line->wordsLength >= 2) {
+  if (strcmp("printf", line->words[0]) != 0 || line->wordsLength < 2) {
     return 0;
   }
 
@@ -405,6 +406,41 @@ int changeBackgroundColorOf(Line *line, HashMap *map) {
     tl->backgroundColor[1] = atoi(line->words[3]);
   if (line->wordsLength >= 5)
     tl->backgroundColor[2] = atoi(line->words[4]);
+
+  return 1;
+}
+
+int changeTextColorOf(Line *line, HashMap *map) {
+  if (line == NULL || map == NULL)
+    return 0;
+
+  if (strcmp("changeTextColorOf", line->words[0]) != 0) {
+    return 0;
+  }
+
+  GameStruct *gameStruct = getGameStruct();
+
+  // Get The button or textLabel
+  ButtonLC *button = searchButton(gameStruct->windows, line->words[1]);
+  TextLabelLC *tl = NULL;
+  if (button != NULL)
+    tl = button->tl;
+
+  if (tl == NULL)
+    tl = searchTextLabel(gameStruct->windows, line->words[1]);
+
+  if (tl == NULL) {
+    printf("Button AND TextLabel NOT Found\n");
+    return 1;
+  }
+
+  // Change RGB color of the background
+  if (line->wordsLength >= 3)
+    tl->textColor[0] = atoi(line->words[2]);
+  if (line->wordsLength >= 4)
+    tl->textColor[1] = atoi(line->words[3]);
+  if (line->wordsLength >= 5)
+    tl->textColor[2] = atoi(line->words[4]);
 
   return 1;
 }

@@ -27,6 +27,7 @@ int printfOperand(Line *line, HashMap *map);
 int changeTextOf(Line *line, HashMap *map);
 int changeImageOf(Line *line, HashMap *map);
 int changeBackgroundColorOf(Line *line, HashMap *map);
+int changeTextColorOf(Line *line, HashMap *map);
 int startScript(Line *line, HashMap *map);
 int intOperand(Line *line, HashMap *map);
 int intG(Line *line, HashMap *map);

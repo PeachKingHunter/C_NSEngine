@@ -3,28 +3,99 @@
 if(numPos == 1)
 {
   changeTextOf(button11, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button11, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button11, 0, 0, 0);
+  }
 }
+
 if(numPos == 2){
   changeTextOf(button21, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button21, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button21, 255, 255, 255);
+  }
 }
+
 if(numPos == 3){
   changeTextOf(button31, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button31, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button31, 0, 0, 0);
+  }
 }
+
 if(numPos == 4){
   changeTextOf(button12, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button12, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button12, 255, 255, 255);
+  }
 }
+
 if(numPos == 5){
   changeTextOf(button22, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button22, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button22, 0, 0, 0);
+  }
 }
+
 if(numPos == 6){
   changeTextOf(button32, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button32, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button32, 255, 255, 255);
+  }
 }
+
 if(numPos == 7){
   changeTextOf(button13, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button13, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button13, 0, 0, 0);
+  }
 }
+
 if(numPos == 8){
   changeTextOf(button23, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button23, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button23, 255, 255, 255);
+  }
 }
+
 if(numPos == 9){
   changeTextOf(button33, val);
+  if (superNumber == 00) {
+    changeTextColorOf(button33, 255, 255, 0);
+  }
+  if (superNumber > 00) {
+
+    changeTextColorOf(button33, 0, 0, 0);
+  }
 }
