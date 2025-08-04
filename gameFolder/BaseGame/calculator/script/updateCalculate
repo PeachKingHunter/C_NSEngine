@@ -1,0 +1,9 @@
+.Update
+int gainSymbols highestNumber;
+div gainSymbols 1000;
+
+int nextSymbols symbols;
+add nextSymbols gainSymbols;
+
+changeTextOf(symbolsDisplay, symbols + " -> " + nextSymbols + " Symbols");
+

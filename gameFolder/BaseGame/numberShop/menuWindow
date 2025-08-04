@@ -1,3 +1,4 @@
 .Info
 objType: Window
 size: 400 550
+backgroundColor 30 30 30

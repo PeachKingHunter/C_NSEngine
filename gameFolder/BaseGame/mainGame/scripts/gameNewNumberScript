@@ -24,11 +24,15 @@ changeImageOf(button13, " ");
 changeImageOf(button23, " ");
 changeImageOf(button33, " ");
 
-// Super Number's effect
-randInto(superNumber, 00, 33);
-if superNumber == 00 {
-  mult actuGameNum 10;
+
+if (rubySuperNumberUnlocked == 1) {
+  // Super Number's effect
+  randInto(superNumber, 00, 33);
+  if superNumber == 00 {
+    mult actuGameNum 10;
+  }
 }
+
 
 // Change the button to click and write the number on it
 randInto(numGamePos, 1, 9);

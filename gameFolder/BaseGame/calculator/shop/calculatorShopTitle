@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 150 40
+pos: 20 207
+text: "Market"
+borderColor: 0 0 0
+backgroundColor: 0 100 0
+textColor 255 255 255
+textSize 10

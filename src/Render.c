@@ -14,7 +14,10 @@ void render(WindowLC *windowLC) {
   }
 
   // Draw background and clear window's drawing
-  SDL_SetRenderDrawColor(windowLC->renderer, 30, 30, 30, 255); // fond noir
+  SDL_SetRenderDrawColor(windowLC->renderer, windowLC->backgroundColor[0],
+                         windowLC->backgroundColor[1],
+                         windowLC->backgroundColor[2],
+                         windowLC->backgroundColor[3]); // window background
   SDL_RenderClear(windowLC->renderer);
 
   // Render all textLabels

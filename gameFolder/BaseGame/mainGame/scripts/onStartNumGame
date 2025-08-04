@@ -15,6 +15,7 @@ intG rubyGamePos 11;
 loadOrCreate "NumberResource" number 0;
 loadOrCreate "HighestNumber" highestNumber 1;
 loadOrCreate "RubyResource" ruby 0;
+loadOrCreate "SymbolsResource" symbols 0;
 
 // Script executed
 printf("Start executed");

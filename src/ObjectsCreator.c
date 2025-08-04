@@ -226,7 +226,13 @@ int backgroundColorOperand(Line *line, int *backgroundColor, void *obj,
     backgroundColor[3] = atoi(line->words[4]);
 
   // If the object was already created
-  if (objType == 2) {
+  if (objType == 1) {
+    ((WindowLC *) obj)->backgroundColor[0] = backgroundColor[0]; 
+    ((WindowLC *) obj)->backgroundColor[1] = backgroundColor[1]; 
+    ((WindowLC *) obj)->backgroundColor[2] = backgroundColor[2]; 
+    ((WindowLC *) obj)->backgroundColor[3] = backgroundColor[3]; 
+
+  } else if (objType == 2) {
     setButtonBackgroundColor(obj, backgroundColor);
 
   } else if (objType == 3) {
@@ -314,13 +320,19 @@ int objTypeOperand(Line *line, WindowLC **window, int sizeX, int sizeY,
     (*window)->textLabels = NULL;
     (*window)->name = strdup(fp->fileName);
     (*window)->window =
-        SDL_CreateWindow("Test", sizeX, sizeY, SDL_WINDOW_RESIZABLE);
-    (*window)->sizeX = sizeX;
-    (*window)->sizeY = sizeY;
+      SDL_CreateWindow("Number Simulator", sizeX, sizeY, SDL_WINDOW_RESIZABLE);
     if ((*window)->window == NULL) {
       free(*window);
       return -1;
     }
+    (*window)->sizeX = sizeX;
+    (*window)->sizeY = sizeY;
+
+    (*window)->backgroundColor = (int *) malloc(sizeof(int) * 4);
+    (*window)->backgroundColor[0] = backgroundColor[0];
+    (*window)->backgroundColor[1] = backgroundColor[1];
+    (*window)->backgroundColor[2] = backgroundColor[2];
+    (*window)->backgroundColor[4] = backgroundColor[4];
 
     // Create Renderer
     SDL_Renderer *renderer = SDL_CreateRenderer((*window)->window, NULL);

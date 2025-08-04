@@ -1,0 +1,8 @@
+.Info
+objType: TextLabel
+size: 150 30
+pos: 240 410
+text: "100.0E+3"
+borderColor: 255 255 255
+backgroundColor: 44 44 44
+textColor 255 255 255 255

@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 340 20
+pos: 10 120
+text: "curencies && upgrades"
+borderColor: 0 0 0 0
+backgroundColor: 0 0 0 0
+textColor 255 255 255
+textSize 8

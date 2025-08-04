@@ -1,0 +1,10 @@
+.Info
+objType: Button
+size: 110 30
+pos: 20 157
+onClick: calculateScript
+text: "Calculate"
+borderColor: 0 0 0 
+backgroundColor 40 200 0
+textColor 255 255 255
+textSize 8

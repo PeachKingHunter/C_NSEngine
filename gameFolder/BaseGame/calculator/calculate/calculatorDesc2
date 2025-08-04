@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 340 20
+pos: 10 90
+text: "all of the number and ruby"
+borderColor: 0 0 0 0
+backgroundColor: 0 0 0 0
+textColor 255 255 255
+textSize 8

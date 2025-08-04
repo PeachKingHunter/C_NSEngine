@@ -1,0 +1,6 @@
+.Info
+objType: TextLabel
+pos: 10 20
+size: 340 177
+borderColor: 0 0 0
+backgroundColor: 0 100 0

@@ -1,0 +1,55 @@
+.Script
+if(1000 > highestNumber){
+  stopScript;
+}
+
+
+// Increase Symbols
+int gainSymbols highestNumber;
+div gainSymbols 1000;
+add symbols gainSymbols;
+
+
+// Reset ressources
+set number 0;
+set highestNumber 0;
+set ruby 0;
+
+
+// Reset number's shop
+set numberGetMoreNumbers 0;
+set numberGetMoreNumbersQuant 1;
+set numberGetMoreNumbersPrice 100;
+
+set numberGetWaitingTime 10;
+set numberGetWaitingTimeQuant 1;
+set numberGetWaitingTimePrice 125;
+
+set numberGetStartingNumbers 1;
+set numberGetStartingNumbersQuant 1;
+set numberGetStartingNumbersPrice 71;
+
+set numberGetRubySpawnChance 0;
+set numberGetRubySpawnChanceQuant 1;
+set numberGetRubySpawnChancePrice 100;
+
+
+// Reset ruby's shop
+set rubyGetWaitingTime 100;
+set rubyGetWaitingTimeQuant 1;
+set rubyGetWaitingTimePrice 1;
+
+set rubySuperNumberUnlocked 0;
+
+
+// Reset number's game
+set actuGameNum 1;
+set superNumber 99;
+set redBlockGamePos 11;
+set rubyGamePos 11;
+startScript gameButtonChangeNum numPos numGamePos val actuGameNum;
+startScript actuHighestNumber;
+
+
+// Reset upgrades display
+//TODO

@@ -1,0 +1,30 @@
+.StartLate
+// Display
+if (numberCalculatorUnlocked == 1) {
+  hideOf getUnCaButtonX1;
+  hideOf getUnCaDesc1;
+  hideOf getUnCaDesc2;
+  hideOf getUnCaName;
+  hideOf getUnCaPrice;
+  showOf calculatorWindow;
+}
+
+
+.Script
+if(100000 > number){
+  stopScript;
+}
+
+// Use money and increase price
+minus number 100000;
+
+// increase the upgrade
+set numberCalculatorUnlocked 1;
+
+// Display
+hideOf getUnCaButtonX1;
+hideOf getUnCaDesc1;
+hideOf getUnCaDesc2;
+hideOf getUnCaName;
+hideOf getUnCaPrice;
+showOf calculatorWindow;

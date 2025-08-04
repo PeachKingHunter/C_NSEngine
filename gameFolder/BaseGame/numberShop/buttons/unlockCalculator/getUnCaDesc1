@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 210 30
+pos: 10 443
+text: "Calculator use your"
+borderColor: 255 255 255 0
+backgroundColor: 44 44 44 0
+textColor 255 255 255 255
+textSize 6

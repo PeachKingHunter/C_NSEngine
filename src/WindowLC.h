@@ -23,6 +23,7 @@ typedef struct windowLC {
   char *name;
   ButtonLC *buttons;
   TextLabelLC *textLabels;
+  int *backgroundColor;
   int isVisible;
   struct windowLC *next;
 } WindowLC;
