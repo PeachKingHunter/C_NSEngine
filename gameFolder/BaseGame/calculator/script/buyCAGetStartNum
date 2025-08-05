@@ -1,0 +1,28 @@
+.StartLate
+// Display
+int newBoost = CAGetStartNum;
+add newBoost 1;
+int actuBoost = CAGetStartNum;
+changeTextOf(CAStartNumDesc, "x" + actuBoost + " -> x" + newBoost + " start num");
+changeTextOf(CAStartNumPrice, CAGetStartNumPrice + " sym");
+
+
+.Script
+if(CAGetStartNumPrice > symbols){
+  stopScript;
+}
+
+// Use money and increase price
+minus symbols CAGetStartNumPrice;
+add CAGetStartNumPrice CAGetStartNumQuant;
+
+// increase the upgrade
+add CAGetStartNum 1;
+add CAGetStartNumQuant 1;
+
+// Display
+int newBoost = CAGetStartNum;
+add newBoost 1;
+int actuBoost = CAGetStartNum;
+changeTextOf(CAStartNumDesc, "x" + actuBoost + " -> x" + newBoost + " start num");
+changeTextOf(CAStartNumPrice, CAGetStartNumPrice + " sym");

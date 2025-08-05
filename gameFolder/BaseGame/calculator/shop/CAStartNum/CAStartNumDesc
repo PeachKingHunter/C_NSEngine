@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 190 30
+pos: 80 300
+text: "x1 -> x2 start num"
+borderColor: 255 255 255 0
+backgroundColor: 44 44 44 50
+textColor 255 255 255 255
+textSize 7

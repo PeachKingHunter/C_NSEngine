@@ -1,0 +1,9 @@
+.Info
+objType: TextLabel
+size: 130 30
+pos: 220 340
+text: "100.0E15 sym"
+borderColor: 255 255 255 0
+backgroundColor: 44 44 44 10
+textColor 255 255 255 255
+textSize 7

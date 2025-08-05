@@ -8,7 +8,10 @@ if(buttonNum == numGamePos){
   }
 
   // Get numbers
-  add number actuGameNum;
+  int getNum actuGameNum;
+  mult getNum CAGetNum;
+
+  add number getNum;
   add actuGameNum 1;
   add actuGameNum numberGetMoreNumbers;
 
@@ -26,6 +29,7 @@ if (buttonNum == redBlockGamePos) {
   //Reset Number
   set actuGameNum 0;
   add actuGameNum numberGetStartingNumbers;
+  mult actuGameNum CAGetStartNum;
 
   startScript gameNewNumberScript; 
   stopScript;
@@ -38,7 +42,7 @@ if (buttonNum == rubyGamePos) {
   set rubyGamePos 11;
 
   // Increase Ruby
-  add ruby 1;
+  add ruby CAGetRuby;
   printf "Your count of ruby: " + ruby;
 
   stopScript;

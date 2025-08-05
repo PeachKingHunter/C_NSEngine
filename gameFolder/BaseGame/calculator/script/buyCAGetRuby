@@ -1,0 +1,28 @@
+.StartLate
+// Display
+int newBoost = CAGetRuby;
+add newBoost 1; 
+int actuBoost = CAGetRuby;
+changeTextOf(CAGetRubyDesc, "x" + actuBoost + " -> x" + newBoost + " ruby");
+changeTextOf(CAGetRubyPrice, CAGetRubyPrice + " sym");
+
+
+.Script
+if(CAGetRubyPrice > symbols){
+  stopScript;
+}
+
+// Use money and increase price
+minus symbols CAGetRubyPrice;
+add CAGetRubyPrice CAGetRubyQuant;
+
+// increase the upgrade
+add CAGetRuby 1;
+add CAGetRubyQuant 1;
+
+// Display
+int newBoost = CAGetRuby;
+add newBoost 1; 
+int actuBoost = CAGetRuby;
+changeTextOf(CAGetRubyDesc, "x" + actuBoost + " -> x" + newBoost + " ruby");
+changeTextOf(CAGetRubyPrice, CAGetRubyPrice + " sym");

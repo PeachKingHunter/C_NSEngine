@@ -1,0 +1,12 @@
+.Start
+loadOrCreate "CAGetNum" CAGetNum 1;
+loadOrCreate "CAGetNumQuant" CAGetNumQuant 1;
+loadOrCreate "CAGetNumPrice" CAGetNumPrice 1;
+
+loadOrCreate "CAGetStartNum" CAGetStartNum 1;
+loadOrCreate "CAGetStartNumQuant" CAGetStartNumQuant 1;
+loadOrCreate "CAGetStartNumPrice" CAGetStartNumPrice 1;
+
+loadOrCreate "CAGetRuby" CAGetRuby 1;
+loadOrCreate "CAGetRubyQuant" CAGetRubyQuant 1;
+loadOrCreate "CAGetRubyPrice" CAGetRubyPrice 1;
