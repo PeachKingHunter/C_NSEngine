@@ -1,3 +1,4 @@
 *.o
 target/main
 saveRessourceData
+target/main.exe

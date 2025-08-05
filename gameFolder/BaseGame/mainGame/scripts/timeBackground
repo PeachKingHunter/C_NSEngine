@@ -27,6 +27,6 @@ if(timeNum > 340){
   //Reset Number
   set actuGameNum 0;
   add actuGameNum numberGetStartingNumbers;
-
+  mult actuGameNum CAGetStartNum;
   startScript gameNewNumberScript; 
 }
